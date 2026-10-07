@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2896998191933361580
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 511261030552382111, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_Color.a
+      value: 0.11764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855404909590255515, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855404909590255515, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2675479408704431417, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_Name
+      value: GrassTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922224575003517131, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820409839847082596, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2675479408704431417, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6679019012732927749}
+  m_SourcePrefab: {fileID: 100100000, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+--- !u!1 &942662830158522517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2675479408704431417, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+  m_PrefabInstance: {fileID: 2896998191933361580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6679019012732927749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942662830158522517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84977cba168695489164ca6cf126294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrassTile
+  baseColor: {r: 0.32156864, g: 0.7725491, b: 0.20784315, a: 1}
+  offsetcolor: {r: 0.3019608, g: 0.7529412, b: 0.1882353, a: 1}
+  renderer: {fileID: 6804722055506061978}
+  highlight: {fileID: 4950469538726348744}
+--- !u!1 &4950469538726348744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7820409839847082596, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+  m_PrefabInstance: {fileID: 2896998191933361580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6804722055506061978 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8528425891306891062, guid: f87a9cc36c74b82438ea1f5b06ea5a2f, type: 3}
+  m_PrefabInstance: {fileID: 2896998191933361580}
+  m_PrefabAsset: {fileID: 0}
