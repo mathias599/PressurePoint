@@ -43,8 +43,6 @@ public class GridManager : MonoBehaviour
     {
         if (tiles.TryGetValue(pos, out var tile))
         {
-            print($"{tile.name} was clicked ");
-
             return tile;
         }
 
