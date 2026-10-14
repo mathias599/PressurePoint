@@ -763,8 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5241a1d5dd8ca454ca7f3f70f901e3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
-  width: 16
-  height: 9
+  width: 18
+  height: 10
   grassTile: {fileID: 450142293}
   mountainTile: {fileID: 1980084299}
   cam: {fileID: 1222226457}
