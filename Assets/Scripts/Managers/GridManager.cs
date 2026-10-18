@@ -5,6 +5,7 @@ using System;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager Instance;
     [SerializeField] private int width, height;
 
     [SerializeField] private Tile grassTile, mountainTile;
@@ -13,13 +14,12 @@ public class GridManager : MonoBehaviour
 
     private Dictionary<Vector2, Tile> tiles;
 
-    private void Start()
+    private void Awake()
     {
-
-        GenerateGrid();
+        Instance = this;
     }
 
-    void GenerateGrid()
+    public void GenerateGrid()
     {
         tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < width; x++)
@@ -30,13 +30,15 @@ public class GridManager : MonoBehaviour
                 var spawnedTile = Instantiate(randomTile, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
 
-                var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                spawnedTile.Init(isOffset);
+                spawnedTile.Init(x, y);
+
 
                 tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
         cam.transform.position = new Vector3((float)width/2 - 0.5f, (float)height / 2 - 0.5f, -10);
+
+        GameManager.Instance.ChangeState(GameManager.GameState.SpawnHeroes);
     }
 
     public Tile GetAtPosition(Vector2 pos)
