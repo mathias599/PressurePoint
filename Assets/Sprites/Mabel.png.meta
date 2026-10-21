@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: 258b0a90fba1a46478776b47595478e9
+guid: b3e1e641c8df54e459b683d79ec76447
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6909483440889117378
-    second: "$\u4E3B\u4EBA\u516C_0"
+      213: -4326086591009482589
+    second: "$\u30E1\u30A4\u30D9\u30EB_0"
   - first:
-      213: -6595189014397605504
-    second: "$\u4E3B\u4EBA\u516C_1"
+      213: 1462661526262475283
+    second: "$\u30E1\u30A4\u30D9\u30EB_1"
   - first:
-      213: 9113470630867806468
-    second: "$\u4E3B\u4EBA\u516C_2"
+      213: -7288929052499529357
+    second: "$\u30E1\u30A4\u30D9\u30EB_2"
   - first:
-      213: -3709219024656765038
-    second: "$\u4E3B\u4EBA\u516C_3"
+      213: -3847153061652871925
+    second: "$\u30E1\u30A4\u30D9\u30EB_3"
   - first:
-      213: -8377484363956290530
-    second: "$\u4E3B\u4EBA\u516C_4"
+      213: 4414848736599443430
+    second: "$\u30E1\u30A4\u30D9\u30EB_4"
   - first:
-      213: -5279714120036624026
-    second: "$\u4E3B\u4EBA\u516C_5"
+      213: 6978488582650151704
+    second: "$\u30E1\u30A4\u30D9\u30EB_5"
   - first:
-      213: -7706497732531238022
-    second: "$\u4E3B\u4EBA\u516C_6"
+      213: 5013013741542690531
+    second: "$\u30E1\u30A4\u30D9\u30EB_6"
   - first:
-      213: -7237287808464413884
-    second: "$\u4E3B\u4EBA\u516C_7"
+      213: 5994664881192274805
+    second: "$\u30E1\u30A4\u30D9\u30EB_7"
   - first:
-      213: -1463948431579349597
-    second: "$\u4E3B\u4EBA\u516C_8"
+      213: -6811344119582672829
+    second: "$\u30E1\u30A4\u30D9\u30EB_8"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_0"
+      name: Mabel_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,16 +139,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2cab3abd49a63ef50800000000000000
-      internalID: 6909483440889117378
+      spriteID: 7421d78fc44d5cc4bb89495e3358ae06
+      internalID: -587601117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_1"
+      name: Mabel_1
       rect:
         serializedVersion: 2
         x: 32
@@ -161,16 +161,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 089a542c88e2974a0800000000000000
-      internalID: -6595189014397605504
+      spriteID: 21158a623bf731943854f180781c80c0
+      internalID: -478581175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_2"
+      name: Mabel_2
       rect:
         serializedVersion: 2
         x: 64
@@ -183,16 +183,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 409a4d7e04d897e70800000000000000
-      internalID: 9113470630867806468
+      spriteID: 82ab21e85079f5b40bbc9515ed016ff5
+      internalID: 1415082395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_3"
+      name: Mabel_3
       rect:
         serializedVersion: 2
         x: 0
@@ -205,16 +205,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 29f663903f4368cc0800000000000000
-      internalID: -3709219024656765038
+      spriteID: 5a89ea3e4778b9a45927cb3892550624
+      internalID: 1985378461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_4"
+      name: Mabel_4
       rect:
         serializedVersion: 2
         x: 32
@@ -227,16 +227,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e1cfef65b523dbb80800000000000000
-      internalID: -8377484363956290530
+      spriteID: bd496600cd448ae47b67481f8316fa33
+      internalID: 1494082856
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_5"
+      name: Mabel_5
       rect:
         serializedVersion: 2
         x: 64
@@ -249,16 +249,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6695a9f1bffaab6b0800000000000000
-      internalID: -5279714120036624026
+      spriteID: b852b5dee0285db4b9ef3e23a2d8ba97
+      internalID: -2272844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_6"
+      name: Mabel_6
       rect:
         serializedVersion: 2
         x: 0
@@ -271,16 +271,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a7b4f1e94250d0590800000000000000
-      internalID: -7706497732531238022
+      spriteID: 91a08596f877ea54587ae5a3a60f0ba5
+      internalID: 929765489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_7"
+      name: Mabel_7
       rect:
         serializedVersion: 2
         x: 32
@@ -293,16 +293,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 44b963f351dff8b90800000000000000
-      internalID: -7237287808464413884
+      spriteID: fbcd4386b7e27e947ae3573b12102e8b
+      internalID: 1572842338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_8"
+      name: Mabel_8
       rect:
         serializedVersion: 2
         x: 64
@@ -315,16 +315,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3adf83668a20fabe0800000000000000
-      internalID: -1463948431579349597
+      spriteID: 2ee18ae1cab7a0c44888f8a12bab3cbd
+      internalID: -1764011232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_9"
+      name: Mabel_9
       rect:
         serializedVersion: 2
         x: 0
@@ -339,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48181304d33f01b4f804bbc978917167
-      internalID: -1817716683
+      spriteID: 3468823c9561ebe45bfa60e850237030
+      internalID: -1028340366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_10"
+      name: Mabel_10
       rect:
         serializedVersion: 2
         x: 32
@@ -361,14 +361,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae1e28ee82a19284d8aad410fed4cef7
-      internalID: 1206510828
+      spriteID: db30cb46e90fe234e85d5a542cc6c24e
+      internalID: 1662181011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "$\u4E3B\u4EBA\u516C_11"
+      name: Mabel_11
       rect:
         serializedVersion: 2
         x: 64
@@ -383,8 +383,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91e4a3fbdf868fd40920d128e53965b5
-      internalID: 1405342966
+      spriteID: 92678f994b50f524aa61394442e26ae7
+      internalID: -218635137
       vertices: []
       indices: 
       edges: []
@@ -393,7 +393,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 301d3a0354922694781dd3e47556ba90
+    spriteID: 88ddb0b5899a11948804c68021ef4a7c
     internalID: 0
     vertices: []
     indices: 
@@ -405,18 +405,18 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":4.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      "$\u4E3B\u4EBA\u516C_0": 6909483440889117378
-      "$\u4E3B\u4EBA\u516C_1": -6595189014397605504
-      "$\u4E3B\u4EBA\u516C_10": 1206510828
-      "$\u4E3B\u4EBA\u516C_11": 1405342966
-      "$\u4E3B\u4EBA\u516C_2": 9113470630867806468
-      "$\u4E3B\u4EBA\u516C_3": -3709219024656765038
-      "$\u4E3B\u4EBA\u516C_4": -8377484363956290530
-      "$\u4E3B\u4EBA\u516C_5": -5279714120036624026
-      "$\u4E3B\u4EBA\u516C_6": -7706497732531238022
-      "$\u4E3B\u4EBA\u516C_7": -7237287808464413884
-      "$\u4E3B\u4EBA\u516C_8": -1463948431579349597
-      "$\u4E3B\u4EBA\u516C_9": -1817716683
+      Mabel_0: -587601117
+      Mabel_1: -478581175
+      Mabel_10: 1662181011
+      Mabel_11: -218635137
+      Mabel_2: 1415082395
+      Mabel_3: 1985378461
+      Mabel_4: 1494082856
+      Mabel_5: -2272844
+      Mabel_6: 929765489
+      Mabel_7: 1572842338
+      Mabel_8: -1764011232
+      Mabel_9: -1028340366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
