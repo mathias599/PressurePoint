@@ -294,9 +294,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1051121408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fefbbc061a8ac547a950c4089cd9cc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e0f4ff10d12ce14a8fe15e65c3f95c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  State: 0
 --- !u!1 &1087972822
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,7 +817,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2092064277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5241a1d5dd8ca454ca7f3f70f901e3bc, type: 3}
+  m_Script: {fileID: 11500000, guid: b3638383ebcd53d4394dd94b940587b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   width: 18
