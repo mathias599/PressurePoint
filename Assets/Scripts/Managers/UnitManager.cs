@@ -22,7 +22,8 @@ public class UnitManager : MonoBehaviour
 
         for (int i = 0; i < heroCount; i++)
         {
-
+            var randomPrefab = GetRandomUnit<BaseHero>(Faction.Hero);
+            var spawnedHero = Instantiate(randomPrefab);
         }
     }
 

@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Linq;
+using Unity.VisualScripting;
 
 public class GridManager : MonoBehaviour
 {
@@ -40,6 +43,12 @@ public class GridManager : MonoBehaviour
 
         GameManager.Instance.ChangeState(GameManager.GameState.SpawnHeroes);
     }
+
+    public Tile GetHeroSpawnTile()
+    {
+        return tiles.Where(t => t.Key.x < width / 2).OrderBy(t => UnityEngine.Random.value).First().Value;
+    }
+
 
     public Tile GetAtPosition(Vector2 pos)
     {
