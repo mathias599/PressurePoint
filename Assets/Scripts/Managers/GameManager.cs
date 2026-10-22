@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
                 GridManager.Instance.GenerateGrid();
                 break;
             case GameState.SpawnHeroes:
-
+                UnitManager.instance.SpawnHeroes();
                 break;
             case GameState.SpawnEnemies:
                 break;

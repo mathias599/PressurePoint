@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6679019012732927749, guid: 1a07da5c827a89647b408507b716b8bf, type: 3}
+      propertyPath: isWalkable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -253,6 +257,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2187270549645258087, guid: 1a07da5c827a89647b408507b716b8bf, type: 3}
   m_PrefabInstance: {fileID: 257169666}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &809182141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809182143}
+  - component: {fileID: 809182142}
+  m_Layer: 0
+  m_Name: UnitManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &809182142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809182141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb49f301cc8c334db3ab36979f181be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitManager
+--- !u!4 &809182143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809182141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.26154, y: 4.28675, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1051121408
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +957,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1802521704074854081, guid: 62677f9138f8a414f9c6c3154f70c7a8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1076117832, guid: 2c2ca9538d6b91d4687fb3f580bd9c78, type: 3}
+    - target: {fileID: 1802521704074854081, guid: 62677f9138f8a414f9c6c3154f70c7a8, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6832053025042732650, guid: 62677f9138f8a414f9c6c3154f70c7a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -965,3 +1021,4 @@ SceneRoots:
   - {fileID: 1051121409}
   - {fileID: 7718236590147327346}
   - {fileID: 6187371791418139486}
+  - {fileID: 809182143}
