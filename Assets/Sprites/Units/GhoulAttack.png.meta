@@ -1,0 +1,650 @@
+fileFormatVersion: 2
+guid: edcc2139e9c218a4788d9af81069b1ac
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8917787093620398130
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_0
+  - first:
+      213: 7109624036488316344
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_1
+  - first:
+      213: 8802724098218089852
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_2
+  - first:
+      213: 8179098633895427258
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_3
+  - first:
+      213: -7875336341024898770
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_4
+  - first:
+      213: -9133516713996350183
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_5
+  - first:
+      213: 6369281989634163950
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_6
+  - first:
+      213: -610342269023325046
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_7
+  - first:
+      213: -3152970223484642327
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_8
+  - first:
+      213: 4401567854199022412
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_9
+  - first:
+      213: -7427501116973592359
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_10
+  - first:
+      213: 6877405771601634164
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_11
+  - first:
+      213: 3614705232606989727
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_12
+  - first:
+      213: -5882815409161495529
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_13
+  - first:
+      213: -3775271643605761592
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_14
+  - first:
+      213: 2038904591991520955
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_15
+  - first:
+      213: -3204248091029768443
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_16
+  - first:
+      213: 8267594111616991155
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_17
+  - first:
+      213: 606258566146461124
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_18
+  - first:
+      213: -5371388281014202
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_19
+  - first:
+      213: -6231732990737376616
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_20
+  - first:
+      213: 3714395988370372784
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_21
+  - first:
+      213: -8999808005495990336
+    second: Gemini_Generated_Image_2d06tf2d06tf2d067_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GhoulAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 954
+        width: 162
+        height: 241
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8645a95902d9d174489cef68d06a7a91
+      internalID: -2069083567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_1
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 928
+        width: 169
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58999f9a6f7c6c848b723b7b4d0a5a17
+      internalID: -860624253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_2
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 897
+        width: 238
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 50, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d1916ea9ff3a514381b6ef6ab96dfa4
+      internalID: 455554532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_3
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 984
+        width: 184
+        height: 211
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c43ac8d34d4fb2439ad25f6c5701404
+      internalID: 518106429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_4
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 975
+        width: 149
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b3316f395d0604bb8959316c4f8d8c
+      internalID: 440930035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 599
+        width: 179
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 942468a2c4ccb4548a411d5968d181f6
+      internalID: -189484113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_6
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 682
+        width: 172
+        height: 215
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53143fb8fdbf33c4aa56811d89fbf6aa
+      internalID: -900482028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_7
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 678
+        width: 220
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2da874859583bb64f8bbaf9c52ef638a
+      internalID: -756619683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_8
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 685
+        width: 173
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac8fed11e0265e34c9d906c6b0159b78
+      internalID: 1416106315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_9
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 682
+        width: 157
+        height: 215
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec88731efb789e149a7628fd2ad3c517
+      internalID: -429414706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 301
+        width: 169
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78aaa1c3cbe78c247955a0e4ba527139
+      internalID: 1859336471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_11
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 301
+        width: 189
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93cae150fff22a148a338c850d5a41d5
+      internalID: -75159838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_12
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 301
+        width: 179
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ab1bd682dd1e8748b3e0ad0818664c6
+      internalID: -1606917806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_13
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 301
+        width: 179
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 558d0cb04672c9a43b21424d79b704e8
+      internalID: -1295672691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_14
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 301
+        width: 179
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b380291546eec348b9a7d053fd2bfa0
+      internalID: 268564264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3
+        width: 179
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573fc4e619d8abb46bcb34a46b7a93d6
+      internalID: 1242048616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_16
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 3
+        width: 186
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dd68c5843ae93a4a8421667cacfcedd
+      internalID: 273238719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_17
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 4
+        width: 179
+        height: 290
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9d1c48950f532240b3160dd5050de83
+      internalID: -638821084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_18
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 3
+        width: 190
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f9b8ac4469b4964f9bb35d820919783
+      internalID: 439187383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhoulAttack_19
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3
+        width: 168
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97d1811011aea9940a9e179836084499
+      internalID: -1754140457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 8421982555fd6754f90497523d0f7838
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":4.0},"gridSpriteSize":{"x":179.0,"y":298.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      GhoulAttack_0: -2069083567
+      GhoulAttack_1: -860624253
+      GhoulAttack_10: 1859336471
+      GhoulAttack_11: -75159838
+      GhoulAttack_12: -1606917806
+      GhoulAttack_13: -1295672691
+      GhoulAttack_14: 268564264
+      GhoulAttack_15: 1242048616
+      GhoulAttack_16: 273238719
+      GhoulAttack_17: -638821084
+      GhoulAttack_18: 439187383
+      GhoulAttack_19: -1754140457
+      GhoulAttack_2: 455554532
+      GhoulAttack_3: 518106429
+      GhoulAttack_4: 440930035
+      GhoulAttack_5: -189484113
+      GhoulAttack_6: -900482028
+      GhoulAttack_7: -756619683
+      GhoulAttack_8: 1416106315
+      GhoulAttack_9: -429414706
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
