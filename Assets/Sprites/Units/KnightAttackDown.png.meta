@@ -1,0 +1,259 @@
+fileFormatVersion: 2
+guid: b840330141ebcf2449cea1cf4cd3be74
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1368519161191829812
+    second: Designer_0
+  - first:
+      213: -1976851220233713473
+    second: Designer_1
+  - first:
+      213: -6017677516095058866
+    second: Designer_2
+  - first:
+      213: 2107091466582034207
+    second: Designer_3
+  - first:
+      213: 1455709132893233047
+    second: Designer_4
+  - first:
+      213: 2699052552895151442
+    second: Designer_5
+  - first:
+      213: 4733043069185873407
+    second: Designer_6
+  - first:
+      213: -5063083417321636177
+    second: Designer_7
+  - first:
+      213: 2908861599464346671
+    second: Designer_8
+  - first:
+      213: -5024252741258804174
+    second: Designer_9
+  - first:
+      213: 1086544115737242516
+    second: Designer_10
+  - first:
+      213: -486765696657033135
+    second: Designer_11
+  - first:
+      213: -2641846634532815813
+    second: Designer_12
+  - first:
+      213: -995138957953604594
+    second: Designer_13
+  - first:
+      213: -6546767424922119605
+    second: Designer_14
+  - first:
+      213: 8640114202916679339
+    second: Designer_15
+  - first:
+      213: -5695919993855142984
+    second: Designer_16
+  - first:
+      213: 268905283345755203
+    second: Designer_17
+  - first:
+      213: 5922368574762997478
+    second: Designer_18
+  - first:
+      213: 7854736771184486573
+    second: Designer_19
+  - first:
+      213: -4671490535289991983
+    second: Designer_20
+  - first:
+      213: -7946631744522344252
+    second: Designer_21
+  - first:
+      213: 1947236243465148172
+    second: Designer_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: KnightAttackDown_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 569
+        width: 341
+        height: 611
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73b80cbfc4b7a934ab957acb2c52a64f
+      internalID: 1508028335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnightAttackDown_1
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 460
+        width: 347
+        height: 542
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8292209cbdf9f2e4cb7e69d84c9a0547
+      internalID: -848862645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnightAttackDown_2
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 456
+        width: 336
+        height: 461
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c7f2009625240441aae565f1f662d97
+      internalID: -1704660823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3efa317cf4e02d84d8fa9b758f86e8cb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":1.0},"gridSpriteSize":{"x":341.0,"y":1536.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      KnightAttackDown_0: 1508028335
+      KnightAttackDown_1: -848862645
+      KnightAttackDown_2: -1704660823
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
