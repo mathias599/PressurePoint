@@ -105,5 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3ca8f9f0ea48d4ab8645dbb44f13f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
+  unitName: Ghoul
   occupiedTile: {fileID: 0}
   faction: 1

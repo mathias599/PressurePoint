@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Tile : MonoBehaviour
 {
+    public string tileName;
     [SerializeField] protected SpriteRenderer renderer;
     [SerializeField] private GameObject highlight;
     [SerializeField] private bool isWalkable;
@@ -16,12 +17,14 @@ public abstract class Tile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-          highlight.SetActive(true);
+        highlight.SetActive(true);
+        MenuManager.instance.ShowTileInfo(this);
     }
 
     private void OnMouseExit()
     {
         highlight.SetActive(false);
+        MenuManager.instance.ShowTileInfo(null);
     }
 
     private void OnMouseDown()

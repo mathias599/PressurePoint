@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84977cba168695489164ca6cf126294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrassTile
+  tileName: Grasslands
   renderer: {fileID: 6804722055506061978}
   highlight: {fileID: 4950469538726348744}
   isWalkable: 1

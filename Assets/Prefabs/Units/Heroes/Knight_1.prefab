@@ -105,4 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cb3b0ad4b5fed4da719ae813ab4a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hero1
+  unitName: Knight
   occupiedTile: {fileID: 0}
+  faction: 0
