@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: KnightWalkRight
+  m_Name: GhoulWalkLeft
   serializedVersion: 8
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1612140244, guid: 258b0a90fba1a46478776b47595478e9, type: 3}
+      value: {fileID: -8110614230729333908, guid: 20b756c7755f3c64eab36510c8474f0f, type: 3}
     - time: 0.083333336
-      value: {fileID: -1380898479, guid: 258b0a90fba1a46478776b47595478e9, type: 3}
+      value: {fileID: 8493898241702802346, guid: 20b756c7755f3c64eab36510c8474f0f, type: 3}
     - time: 0.16666667
-      value: {fileID: 590272429, guid: 258b0a90fba1a46478776b47595478e9, type: 3}
+      value: {fileID: -6750018006444099877, guid: 20b756c7755f3c64eab36510c8474f0f, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -49,9 +49,9 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: 1612140244, guid: 258b0a90fba1a46478776b47595478e9, type: 3}
-    - {fileID: -1380898479, guid: 258b0a90fba1a46478776b47595478e9, type: 3}
-    - {fileID: 590272429, guid: 258b0a90fba1a46478776b47595478e9, type: 3}
+    - {fileID: -8110614230729333908, guid: 20b756c7755f3c64eab36510c8474f0f, type: 3}
+    - {fileID: 8493898241702802346, guid: 20b756c7755f3c64eab36510c8474f0f, type: 3}
+    - {fileID: -6750018006444099877, guid: 20b756c7755f3c64eab36510c8474f0f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
