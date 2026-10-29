@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public abstract class Tile : MonoBehaviour
@@ -48,8 +49,22 @@ public abstract class Tile : MonoBehaviour
         {
             if(UnitManager.instance.selectedHero!= null)
             {
-                SetUnit(UnitManager.instance.selectedHero);
-                UnitManager.instance.SetSelectedHero(null);
+                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+                if (hit.collider != null)
+                {
+                    Tile clickedTile = hit.collider.GetComponent<Tile>();
+
+                    if (clickedTile != null)
+                    {
+                        if (clickedTile.isWalkable)
+                        {
+                            SetUnit(UnitManager.instance.selectedHero);
+                            UnitManager.instance.SetSelectedHero(null);
+
+                        }
+                    }
+                }
 
             }
         }
