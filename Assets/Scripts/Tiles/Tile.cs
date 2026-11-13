@@ -1,5 +1,6 @@
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Tile : MonoBehaviour
 {
@@ -30,15 +31,28 @@ public abstract class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.Instance.State != GameManager.GameState.HeroesTurn) return;
+        Debug.Log("Tile werd aangeklikt");
+        if (GameManager.Instance.State != GameManager.GameState.HeroesTurn)
+        {
+            Debug.Log("Niet de heroes turn");
+            return;
+        }
 
         if (occupiedUnit != null)
         {
-            if (occupiedUnit.faction == Faction.Hero) UnitManager.instance.SetSelectedHero((BaseHero)occupiedUnit);
+            Debug.Log("Tile is niet leeg");
+            if (occupiedUnit.faction == Faction.Hero)
+            {
+                Debug.Log("Hero aangeklikt");
+                UnitManager.instance.SetSelectedHero((BaseHero)occupiedUnit);
+            }
+
             else
             {
-                if(UnitManager.instance.selectedHero != null)
+                Debug.Log("Tegenstander op tile");
+                if (UnitManager.instance.selectedHero != null)
                 {
+                    Debug.Log("Enemy! dood!");
                     var enemy = (BaseEnemy)occupiedUnit;
                     Destroy(enemy.gameObject);
                     UnitManager.instance.SetSelectedHero(null);
@@ -49,7 +63,7 @@ public abstract class Tile : MonoBehaviour
         {
             if(UnitManager.instance.selectedHero!= null)
             {
-                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
                 if (hit.collider != null)
                 {
