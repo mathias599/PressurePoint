@@ -1,0 +1,431 @@
+fileFormatVersion: 2
+guid: a4c3beb5d62d03f4cbea0bf27a21aa7b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6236553559591846308
+    second: Idles_0
+  - first:
+      213: -7999918649524488091
+    second: Idles_1
+  - first:
+      213: 3030542564758942801
+    second: Idles_2
+  - first:
+      213: 9092482543975988281
+    second: Idles_3
+  - first:
+      213: -6492910520523154434
+    second: Idles_4
+  - first:
+      213: 4041596353534060560
+    second: Idles_5
+  - first:
+      213: 8402730940638586612
+    second: Idles_6
+  - first:
+      213: -2386472909655060392
+    second: Idles_7
+  - first:
+      213: 1178864237681901620
+    second: Idles_8
+  - first:
+      213: -6645159808714251526
+    second: Idles_9
+  - first:
+      213: -7278631976100708358
+    second: Idles_10
+  - first:
+      213: 5448557563465134857
+    second: Idles_11
+  - first:
+      213: -1160281286461076447
+    second: Idles_12
+  - first:
+      213: 5672035307826786066
+    second: Idles_13
+  - first:
+      213: 7407720889636475610
+    second: Idles_14
+  - first:
+      213: -1221888143715172362
+    second: Idles_15
+  - first:
+      213: -3525502574193148546
+    second: Idles_16
+  - first:
+      213: 932273980055400129
+    second: Idles_17
+  - first:
+      213: -4619957757293624702
+    second: Idles_18
+  - first:
+      213: 3159639428440209261
+    second: Idles_19
+  - first:
+      213: -7204794808990508770
+    second: Idles_20
+  - first:
+      213: -8597602420540547438
+    second: Idles_21
+  - first:
+      213: -4659344487286252071
+    second: Idles_22
+  - first:
+      213: -8226725783116153184
+    second: Idles_23
+  - first:
+      213: 688294261915150112
+    second: Idles_24
+  - first:
+      213: 9176276071006112060
+    second: Idles_25
+  - first:
+      213: -1083548365087931128
+    second: Idles_26
+  - first:
+      213: 817291663742906121
+    second: Idles_27
+  - first:
+      213: -7364277230743231828
+    second: Idles_28
+  - first:
+      213: -8626349115940546869
+    second: Idles_29
+  - first:
+      213: -2345543409164401237
+    second: Idles_30
+  - first:
+      213: 2355248413041428848
+    second: Idles_31
+  - first:
+      213: 2951212262079529075
+    second: Idles_32
+  - first:
+      213: 5628425697210722246
+    second: Idles_33
+  - first:
+      213: -1615134974087689278
+    second: Idles_34
+  - first:
+      213: 9094107317620242266
+    second: Idles_35
+  - first:
+      213: -7858677089667941397
+    second: Idles_36
+  - first:
+      213: -6023505153847789004
+    second: Idles_37
+  - first:
+      213: -2627532198303919490
+    second: Idles_38
+  - first:
+      213: -882281697177592832
+    second: Idles_39
+  - first:
+      213: 3553781703460757929
+    second: Idles_40
+  - first:
+      213: -7774507720691130257
+    second: Idles_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Idles_0
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 655
+        width: 265
+        height: 358
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5e74d9849f4379a0800000000000000
+      internalID: -6236553559591846308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idles_1
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 655
+        width: 219
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568f117af549af090800000000000000
+      internalID: -7999918649524488091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idles_2
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 656
+        width: 221
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1547829f766ae0a20800000000000000
+      internalID: 3030542564758942801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idles_3
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 656
+        width: 266
+        height: 356
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93cf02023bcfe2e70800000000000000
+      internalID: 9092482543975988281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idles_4
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 170
+        width: 283
+        height: 408
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efb12d1584c84e5a0800000000000000
+      internalID: -6492910520523154434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idles_5
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 173
+        width: 261
+        height: 398
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01869e16872a61830800000000000000
+      internalID: 4041596353534060560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idles_6
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 169
+        width: 265
+        height: 405
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f662fb554f7c9470800000000000000
+      internalID: 8402730940638586612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idles_7
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 170
+        width: 263
+        height: 403
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 850dae1688b81eed0800000000000000
+      internalID: -2386472909655060392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5f1ba8f52e5a71b4e865a2ae5d4757a1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":2.0},"gridSpriteSize":{"x":313.0,"y":627.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Idles_0: -6236553559591846308
+      Idles_1: -7999918649524488091
+      Idles_2: 3030542564758942801
+      Idles_3: 9092482543975988281
+      Idles_4: -6492910520523154434
+      Idles_5: 4041596353534060560
+      Idles_6: 8402730940638586612
+      Idles_7: -2386472909655060392
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
