@@ -1,15 +1,13 @@
-using UnityEngine;
+using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour.
 
-public class BaseHero : BaseUnit
+public class BaseHero : BaseUnit // Maakt de klasse BaseHero aan. Deze erft alles van BaseUnit. Dit is de basisklasse van alle helden.
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Start() // Wordt één keer uitgevoerd vlak voor de eerste Update. Er staat nog geen code in.
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() // Wordt elke frame uitgevoerd. Er staat nog geen code in.
     {
         
     }

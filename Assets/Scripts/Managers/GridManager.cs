@@ -1,68 +1,73 @@
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Linq;
-using Unity.VisualScripting;
+using UnityEngine; // Haalt de Unity-functionaliteiten binnen.
+using System.Collections; // Maakt werken met collecties en IEnumerator mogelijk. Wordt hier momenteel niet gebruikt.
+using System.Collections.Generic; // Maakt gebruik van bijvoorbeeld Dictionary mogelijk.
+using System; // Haalt algemene C#-functionaliteiten binnen. Daardoor moet je hieronder UnityEngine.Random voluit schrijven.
+using System.Runtime.InteropServices.WindowsRuntime; // Functionaliteiten voor communicatie met Windows Runtime. Wordt hier momenteel niet gebruikt.
+using System.Linq; // Maakt het mogelijk om lijsten en dictionaries te filteren en sorteren.
+using Unity.VisualScripting; // Haalt de Unity Visual Scripting-functionaliteiten binnen. Wordt hier momenteel niet gebruikt.
 
-public class GridManager : MonoBehaviour
+public class GridManager : MonoBehaviour // Maakt de klasse GridManager aan, die aan een Unity GameObject gekoppeld kan worden.
 {
-    public static GridManager Instance;
-    [SerializeField] private int width, height;
+    public static GridManager Instance; // Maakt een statische variabele zodat andere scripts GridManager kunnen bereiken.
 
-    [SerializeField] private Tile grassTile, mountainTile;
+    [SerializeField] private int width, height; // Bepaalt de breedte en hoogte van het speelveld. SerializeField maakt deze zichtbaar in de Inspector.
 
-    [SerializeField] private Transform cam;
+    [SerializeField] private Tile grassTile, mountainTile; // Verwijst naar de grass- en mountain-tile prefabs die in Unity ingesteld worden.
 
-    private Dictionary<Vector2, Tile> tiles;
+    [SerializeField] private Transform cam; // Verwijst naar de Transform van de camera.
 
-    private void Awake()
+    private Dictionary<Vector2, Tile> tiles; // Bewaart alle tegels met hun positie als sleutel en hun Tile als waarde.
+
+    private void Awake() // Wordt automatisch uitgevoerd wanneer het object wordt geladen.
     {
-        Instance = this;
+        Instance = this; // Slaat deze GridManager op zodat andere scripts hem kunnen gebruiken.
     }
 
-    public void GenerateGrid()
+    public void GenerateGrid() // Methode die het volledige speelveld aanmaakt.
     {
-        tiles = new Dictionary<Vector2, Tile>();
-        for (int x = 0; x < width; x++)
+        tiles = new Dictionary<Vector2, Tile>(); // Maakt een nieuwe Dictionary aan om alle tegels in op te slaan.
+
+        for (int x = 0; x < width; x++) // Herhaalt de code voor elke positie in de breedte.
         {
-            for(int y = 0; y < height; y++)
+            for (int y = 0; y < height; y++) // Herhaalt de code voor elke positie in de hoogte.
             {
-                var randomTile = UnityEngine.Random.Range(0,6) == 3? mountainTile : grassTile;
-                var spawnedTile = Instantiate(randomTile, new Vector3(x, y), Quaternion.identity);
-                spawnedTile.name = $"Tile {x} {y}";
+                var randomTile = UnityEngine.Random.Range(0, 6) == 3 ? mountainTile : grassTile; // Kiest een getal van 0 t/m 5. Bij 3 wordt het een berg (kans van 1 op 6), anders gras.
 
-                spawnedTile.Init(x, y);
+                var spawnedTile = Instantiate(randomTile, new Vector3(x, y), Quaternion.identity); // Maakt de gekozen tegel aan op positie x en y, zonder rotatie.
+
+                spawnedTile.name = $"Tile {x} {y}"; // Geeft de aangemaakte tegel een naam met zijn x- en y-coördinaten.
+
+                spawnedTile.Init(x, y); // Initialiseert de tegel en geeft zijn positie door.
 
 
-                tiles[new Vector2(x, y)] = spawnedTile;
+                tiles[new Vector2(x, y)] = spawnedTile; // Slaat de aangemaakte tegel op in de Dictionary met zijn positie als sleutel.
             }
         }
-        cam.transform.position = new Vector3((float)width/2 - 0.5f, (float)height / 2 - 0.5f, -10);
 
-        GameManager.Instance.ChangeState(GameManager.GameState.SpawnHeroes);
+        cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10); // Zet de camera in het midden van het speelveld. De -10 plaatst hem vóór de tegels zodat hij ze kan zien.
+
+        GameManager.Instance.ChangeState(GameManager.GameState.SpawnHeroes); // Verandert de gamestate zodat de helden op het speelveld geplaatst kunnen worden.
     }
 
-    public Tile GetHeroSpawnTile()
+    public Tile GetHeroSpawnTile() // Methode die een willekeurige vrije starttegel voor de held zoekt.
     {
-        return tiles.Where(t => t.Key.x < width / 2 && t.Value.walkable).OrderBy(t => UnityEngine.Random.value).First().Value;
+        return tiles.Where(t => t.Key.x < width / 2 && t.Value.walkable).OrderBy(t => UnityEngine.Random.value).First().Value; // Zoekt bewandelbare tegels op de linkerhelft, sorteert ze willekeurig en kiest de eerste.
     }
 
-    public Tile GetEnemySpawnTile()
+    public Tile GetEnemySpawnTile() // Methode die een willekeurige vrije starttegel voor de vijand zoekt.
     {
-        return tiles.Where(t => t.Key.x > width / 2 && t.Value.walkable).OrderBy(t => UnityEngine.Random.value).First().Value;
+        return tiles.Where(t => t.Key.x > width / 2 && t.Value.walkable).OrderBy(t => UnityEngine.Random.value).First().Value; // Zoekt bewandelbare tegels op de rechterhelft, sorteert ze willekeurig en kiest de eerste.
     }
 
 
 
-    public Tile GetAtPosition(Vector2 pos)
+    public Tile GetAtPosition(Vector2 pos) // Methode die de tegel op een bepaalde positie opzoekt.
     {
-        if (tiles.TryGetValue(pos, out var tile))
+        if (tiles.TryGetValue(pos, out var tile)) // Controleert of er een tegel bestaat op de opgegeven positie en slaat die op in tile.
         {
-            return tile;
+            return tile; // Geeft de gevonden tegel terug.
         }
 
-        return null;
+        return null; // Geeft null terug als er geen tegel op die positie bestaat.
     }
 }

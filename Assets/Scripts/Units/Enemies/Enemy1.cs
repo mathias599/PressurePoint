@@ -1,15 +1,13 @@
-using UnityEngine;
+using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour.
 
-public class Enemy1 : BaseEnemy
+public class Enemy1 : BaseEnemy // Maakt de klasse Enemy1 aan. Deze erft alles van BaseEnemy. Dit is het script van de Ghoul.
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Start() // Wordt één keer uitgevoerd vlak voor de eerste Update. Er staat nog geen code in.
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() // Wordt elke frame uitgevoerd. Er staat nog geen code in.
     {
         
     }

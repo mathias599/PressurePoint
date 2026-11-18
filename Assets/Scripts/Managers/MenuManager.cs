@@ -1,42 +1,44 @@
-using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour en GameObject.
+using UnityEngine.UI; // Geeft toegang tot UI-elementen zoals Text.
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : MonoBehaviour // Maakt de klasse MenuManager aan. Deze beheert de menu's en informatie die op het scherm verschijnen.
 {
-    public static MenuManager instance;
-    [SerializeField] private GameObject selectedHeroObject, tileObject, tileUnitObject;
-    private void Awake()
+    public static MenuManager instance; // Maakt een globale verwijzing zodat andere scripts de MenuManager kunnen gebruiken.
+    [SerializeField] private GameObject selectedHeroObject, tileObject, tileUnitObject; // Verwijst naar drie UI-objecten: informatie over de geselecteerde held, de tegel en de unit op die tegel.
+
+    private void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen.
     {
-        instance = this;
+        instance = this; // Slaat deze MenuManager op als de globale instance.
     }
 
-    public void ShowTileInfo(Tile tile)
+    public void ShowTileInfo(Tile tile) // Methode die informatie toont over de tegel waar de muis op staat. tile is die tegel, of null om de informatie te verbergen.
     {
-        if (tile == null)
+        if (tile == null) // Controleert of er geen tegel is doorgegeven.
         {
-            tileObject.SetActive(false);
-            tileUnitObject.SetActive(false);
-            return;
+            tileObject.SetActive(false); // Verbergt het UI-object met de informatie over de tegel.
+            tileUnitObject.SetActive(false); // Verbergt het UI-object met informatie over de unit op de tegel.
+            return; // Stopt de methode zodat de rest niet uitgevoerd wordt.
         }
 
-        tileObject.GetComponentInChildren<Text>().text = tile.tileName;
-        tileObject.SetActive(true);
+        tileObject.GetComponentInChildren<Text>().text = tile.tileName; // Zoekt een Text-component in de children van het UI-object en verandert de tekst naar de naam van de tegel.
+        tileObject.SetActive(true); // Maakt het UI-object met de tegelinformatie zichtbaar.
 
-        if (tile.occupiedUnit)
+        if (tile.occupiedUnit) // Controleert of er een unit op de tegel staat.
         {
-            tileUnitObject.GetComponentInChildren<Text>().text = tile.occupiedUnit.unitName;
-            tileUnitObject.SetActive(true);
+            tileUnitObject.GetComponentInChildren<Text>().text = tile.occupiedUnit.unitName; // Haalt de naam van de unit op en toont die in het bijbehorende Text-element.
+            tileUnitObject.SetActive(true); // Maakt het UI-object met de unitinformatie zichtbaar.
         }
     }
 
-    public void ShowSelectedHero(BaseHero hero)
+    public void ShowSelectedHero(BaseHero hero) // Methode die informatie over de geselecteerde held toont. hero is die held, of null om de informatie te verbergen.
     {
-        if (hero == null)
+        if (hero == null) // Controleert of er momenteel geen held geselecteerd is.
         {
-            selectedHeroObject.SetActive(false);
-            return;
+            selectedHeroObject.SetActive(false); // Verbergt het UI-object met de informatie over de geselecteerde held.
+            return; // Stopt de methode zodat de rest niet uitgevoerd wordt.
         }
-        selectedHeroObject.GetComponentInChildren<Text>().text = hero.unitName;
-        selectedHeroObject.SetActive(true);
+
+        selectedHeroObject.GetComponentInChildren<Text>().text = hero.unitName; // Zoekt een Text-component in de children van het UI-object en stelt de tekst in op de naam van de geselecteerde held.
+        selectedHeroObject.SetActive(true); // Maakt het UI-object met de informatie over de geselecteerde held zichtbaar.
     }
 }
