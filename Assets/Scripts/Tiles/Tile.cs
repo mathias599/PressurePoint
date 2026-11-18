@@ -52,9 +52,9 @@ public abstract class Tile : MonoBehaviour
                 Debug.Log("Tegenstander op tile");
                 if (UnitManager.instance.selectedHero != null)
                 {
-                    Debug.Log("Enemy! dood!");
+                    Debug.Log("Damaged Enemy");
                     var enemy = (BaseEnemy)occupiedUnit;
-                    Destroy(enemy.gameObject); //enemy healthbar wordt ook verwijderd door de destroy van de enemy en de knight moet kunnen damage doen
+                    enemy.TakeDamage(UnitManager.instance.selectedHero.attackDamage);
                     UnitManager.instance.SetSelectedHero(null);
                 }
             }

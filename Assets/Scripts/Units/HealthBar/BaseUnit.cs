@@ -9,6 +9,7 @@ public class BaseUnit : MonoBehaviour
     [Header("Health")]
     public int maxHealth = 10;
     public int currentHealth;
+    public int attackDamage = 3;
 
     protected virtual void Awake()
     {

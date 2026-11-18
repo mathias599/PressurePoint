@@ -108,3 +108,6 @@ MonoBehaviour:
   unitName: Ghoul
   occupiedTile: {fileID: 0}
   faction: 1
+  maxHealth: 9
+  currentHealth: 0
+  attackDamage: 3

@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
-    public BaseUnit target;              // leeg laten: dan zoekt hij zelf de hero
+    public BaseUnit target; // leeg laten: dan zoekt hij zelf de hero
+    public bool followEnemy;
     public float heightAboveUnit = 0.7f; // hoe hoog boven de unit (in world units, 1 tile = 1)
 
     [Header("Test")]
@@ -34,7 +35,8 @@ public class HealthBar : MonoBehaviour
         // De hero wordt pas gespawnd als het spel start, dus we zoeken hem tot we hem hebben.
         if (target == null)
         {
-            target = FindAnyObjectByType<BaseHero>();
+            if (followEnemy) target = FindAnyObjectByType<BaseEnemy>();
+            else target = FindAnyObjectByType<BaseHero>();
         }
 
         bool hasTarget = target != null;
