@@ -12,6 +12,7 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
     public BaseUnit occupiedUnit; // Bewaart welke unit momenteel op deze tegel staat.
 
     public bool walkable => isWalkable && occupiedUnit == null; // Controleert of de tegel bewandelbaar is EN of er geen unit op staat. Beide voorwaarden moeten true zijn.
+    public bool canPassThrough => isWalkable && !(occupiedUnit is BaseHero);
 
     public virtual void Init(int x, int y) // Methode die een tegel initialiseert met zijn x- en y-coördinaten. Virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
@@ -22,12 +23,17 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
     {
         highlight.SetActive(true); // Activeert het highlight-effect zodat de tegel oplicht.
         MenuManager.instance.ShowTileInfo(this); // Toont informatie over deze tegel in het menu. this verwijst naar deze tegel.
+        UnitManager.instance.AddTileToPath(this);
     }
 
     private void OnMouseExit() // Wordt automatisch uitgevoerd wanneer de muis de tegel verlaat.
     {
         highlight.SetActive(false); // Deactiveert het highlight-effect zodat de tegel niet meer oplicht.
         MenuManager.instance.ShowTileInfo(null); // Verbergt de getoonde tegelinformatie in het menu.
+    }
+    private void OnMouseUp()
+    {
+        UnitManager.instance.FinishDrawingPath();
     }
 
     private void OnMouseDown() // Wordt automatisch uitgevoerd wanneer je met de muis op deze tegel klikt.
@@ -45,7 +51,7 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
             if (occupiedUnit.faction == Faction.Hero) // Controleert of de unit op deze tegel bij de factie van de helden hoort.
             {
                 Debug.Log("Hero aangeklikt"); // Toont in de Console dat een held aangeklikt werd.
-                UnitManager.instance.SetSelectedHero((BaseHero)occupiedUnit); // Selecteert de aangeklikte unit als held. (BaseHero) zet de BaseUnit om naar BaseHero.
+                UnitManager.instance.StartDrawingPath((BaseHero)occupiedUnit); // Selecteert de held en begint een route te tekenen.
             }
 
             else // Wordt uitgevoerd wanneer de unit geen held is, dus een vijand.
@@ -58,29 +64,6 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
                     enemy.TakeDamage(UnitManager.instance.selectedHero.attackDamage); // Doet schade aan de vijand, gelijk aan de attackDamage van de geselecteerde held.
                     UnitManager.instance.SetSelectedHero(null); // Deselecteert de held nadat de aanval uitgevoerd is.
                 }
-            }
-        }
-        else // Wordt uitgevoerd wanneer er GEEN unit op deze tegel staat.
-        {
-            if (UnitManager.instance.selectedHero != null) // Controleert of er een held geselecteerd is.
-            {
-                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // Leest de positie van de muis op het scherm en zet die om naar wereldcoördinaten.
-                RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero); // Voert een 2D Raycast uit op de muispositie om te controleren welk object geraakt wordt.
-                if (hit.collider != null) // Controleert of de Raycast een collider gevonden heeft.
-                {
-                    Tile clickedTile = hit.collider.GetComponent<Tile>(); // Probeert de Tile-component op het aangeklikte object te vinden.
-
-                    if (clickedTile != null) // Controleert of het aangeklikte object daadwerkelijk een Tile-component heeft.
-                    {
-                        if (clickedTile.isWalkable) // Controleert of je op dit type tegel kunt staan. Dat de tegel leeg is, weten we hier al.
-                        {
-                            SetUnit(UnitManager.instance.selectedHero); // Verplaatst de geselecteerde held naar deze tegel.
-                            UnitManager.instance.SetSelectedHero(null); // Deselecteert de held nadat hij verplaatst is.
-
-                        }
-                    }
-                }
-
             }
         }
     }

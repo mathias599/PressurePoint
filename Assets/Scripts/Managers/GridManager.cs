@@ -70,4 +70,44 @@ public class GridManager : MonoBehaviour // Maakt de klasse GridManager aan, die
 
         return null; // Geeft null terug als er geen tegel op die positie bestaat.
     }
+
+    public List<Tile> FindPath(Tile start, Tile goal, int maxSteps)
+    {
+        Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+        var queue = new Queue<Tile>();
+        var cameFrom = new Dictionary<Tile, Tile>();
+        var steps = new Dictionary<Tile, int>();
+
+        queue.Enqueue(start);
+        steps[start] = 0;
+
+        while (queue.Count > 0)
+        {
+            Tile current = queue.Dequeue();
+            if (current == goal) break;
+            if (steps[current] == maxSteps) continue;
+
+            foreach (Vector2 direction in directions)
+            {
+                Tile next = GetAtPosition((Vector2)current.transform.position + direction);
+                if (next == null || !next.walkable || steps.ContainsKey(next)) continue;
+
+                steps[next] = steps[current] + 1;
+                cameFrom[next] = current;
+                queue.Enqueue(next);
+            }
+        }
+
+        if (!steps.ContainsKey(goal)) return null;
+
+        var path = new List<Tile>();
+        Tile tile = goal;
+        while (tile != start)
+        {
+            path.Add(tile);
+            tile = cameFrom[tile];
+        }
+        path.Reverse();
+        return path;
+    }
 }

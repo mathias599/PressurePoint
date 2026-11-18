@@ -9,6 +9,8 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
 
     private List<ScriptableUnit> units; // Maakt een lijst waarin alle beschikbare ScriptableUnit-objecten worden opgeslagen.
     public BaseHero selectedHero; // Bewaart welke held momenteel geselecteerd is.
+    public List<Tile> drawnPath = new List<Tile>();
+    public bool isDrawingPath;
 
     private void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen.
     {
@@ -60,5 +62,57 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
     {
         selectedHero = hero; // Slaat de doorgegeven held op als de momenteel geselecteerde held.
         MenuManager.instance.ShowSelectedHero(hero); // Geeft de held door aan MenuManager, die zijn naam toont of de informatie verbergt als hero null is.
+    }
+    public void StartDrawingPath(BaseHero hero)
+    {
+        if (hero.isMoving) return;
+
+        SetSelectedHero(hero);
+        drawnPath.Clear();
+        drawnPath.Add(hero.occupiedTile);
+        isDrawingPath = true;
+    }
+
+    public void AddTileToPath(Tile tile)
+    {
+        if (!isDrawingPath) return;
+
+        int last = drawnPath.Count - 1;
+
+        // Terug naar de vorige tile = laatste stap ongedaan maken
+        if (last > 0 && tile == drawnPath[last - 1])
+        {
+            drawnPath.RemoveAt(last);
+            return;
+        }
+
+        if (drawnPath.Contains(tile)) return;
+        if (last >= selectedHero.moveRange) return;
+        if (!tile.canPassThrough) return;
+
+        // Alleen tiles direct naast de vorige, dus niet schuin
+        Vector2 difference = tile.transform.position - drawnPath[last].transform.position;
+        if (difference.magnitude > 1.1f) return;
+
+        drawnPath.Add(tile);
+    }
+
+    public void FinishDrawingPath()
+    {
+        if (!isDrawingPath) return;
+        isDrawingPath = false;
+
+        drawnPath.RemoveAt(0); // De starttile hoeft hij niet te lopen
+
+        // Hij mag niet eindigen op een tile waar iemand staat
+        while (drawnPath.Count > 0 && !drawnPath[drawnPath.Count - 1].walkable)
+        {
+            drawnPath.RemoveAt(drawnPath.Count - 1);
+        }
+
+        if (drawnPath.Count == 0) return;
+
+        selectedHero.StartCoroutine(selectedHero.MoveAlongPath(new List<Tile>(drawnPath)));
+        SetSelectedHero(null);
     }
 }

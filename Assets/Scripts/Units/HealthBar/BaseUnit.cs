@@ -1,4 +1,6 @@
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Mathf en Destroy.
+using System.Collections;
+using System.Collections.Generic;
 
 public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de basisklasse van alle helden en vijanden.
 {
@@ -10,6 +12,9 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
     public int maxHealth = 10; // Bepaalt de maximale hoeveelheid levenspunten van de unit.
     public int currentHealth; // Bewaart de huidige hoeveelheid levenspunten.
     public int attackDamage = 3; // Bepaalt hoeveel schade deze unit doet bij een aanval.
+    public int moveRange = 3;
+    public float moveSpeed = 4f;
+    public bool isMoving;
 
     protected virtual void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen. Protected virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
@@ -35,5 +40,34 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
     {
         if (occupiedTile != null) occupiedTile.occupiedUnit = null; // Controleert of de unit op een tegel staat en maakt die tegel daarna vrij.
         Destroy(gameObject); // Verwijdert het volledige GameObject van de unit uit de scène.
+    }
+    public IEnumerator MoveAlongPath(List<Tile> path)
+    {
+        isMoving = true;
+
+        foreach (Tile tile in path)
+        {
+            Vector3 targetPosition = tile.transform.position;
+
+            while (transform.position != targetPosition)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            BaseUnit unitOnTile = tile.occupiedUnit;
+
+            if (unitOnTile != null && unitOnTile.faction != faction)
+            {
+                unitOnTile.TakeDamage(attackDamage);
+            }
+
+            if (tile.occupiedUnit == null)
+            {
+                tile.SetUnit(this);
+            }
+        }
+
+        isMoving = false;
     }
 }
