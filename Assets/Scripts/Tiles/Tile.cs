@@ -51,36 +51,22 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
             else // Wordt uitgevoerd wanneer de unit geen held is, dus een vijand.
             {
                 Debug.Log("Tegenstander op tile"); // Toont in de Console dat er een tegenstander op de tegel staat.
-                if (UnitManager.instance.selectedHero != null) // Controleert of er momenteel een held geselecteerd is.
+                var hero = UnitManager.instance.selectedHero; // Haalt de momenteel geselecteerde held op.
+                if (hero != null) // Controleert of er momenteel een held geselecteerd is.
                 {
                     Debug.Log("Damaged Enemy"); // Toont in de Console dat de vijand schade krijgt.
-                    var enemy = (BaseEnemy)occupiedUnit; // Zet de bezette unit om naar BaseEnemy zodat we de vijand-specifieke klasse kunnen gebruiken.
-                    enemy.TakeDamage(UnitManager.instance.selectedHero.attackDamage); // Doet schade aan de vijand, gelijk aan de attackDamage van de geselecteerde held.
-                    UnitManager.instance.SetSelectedHero(null); // Deselecteert de held nadat de aanval uitgevoerd is.
+                    hero.Attack(occupiedUnit); // De held valt de vijand aan met de gedeelde Attack-methode uit BaseUnit.
+                    UnitManager.instance.HeroActionDone(); // De held heeft zijn actie gedaan: deselecteren en de beurt naar de vijanden.
                 }
             }
         }
         else // Wordt uitgevoerd wanneer er GEEN unit op deze tegel staat.
         {
-            if (UnitManager.instance.selectedHero != null) // Controleert of er een held geselecteerd is.
+            var hero = UnitManager.instance.selectedHero; // Haalt de momenteel geselecteerde held op.
+            if (hero != null && walkable) // Controleert of er een held geselecteerd is en of je op deze tegel kunt staan.
             {
-                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // Leest de positie van de muis op het scherm en zet die om naar wereldcoördinaten.
-                RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero); // Voert een 2D Raycast uit op de muispositie om te controleren welk object geraakt wordt.
-                if (hit.collider != null) // Controleert of de Raycast een collider gevonden heeft.
-                {
-                    Tile clickedTile = hit.collider.GetComponent<Tile>(); // Probeert de Tile-component op het aangeklikte object te vinden.
-
-                    if (clickedTile != null) // Controleert of het aangeklikte object daadwerkelijk een Tile-component heeft.
-                    {
-                        if (clickedTile.isWalkable) // Controleert of je op dit type tegel kunt staan. Dat de tegel leeg is, weten we hier al.
-                        {
-                            SetUnit(UnitManager.instance.selectedHero); // Verplaatst de geselecteerde held naar deze tegel.
-                            UnitManager.instance.SetSelectedHero(null); // Deselecteert de held nadat hij verplaatst is.
-
-                        }
-                    }
-                }
-
+                hero.MoveTo(this); // Verplaatst de held naar deze tegel met de gedeelde MoveTo-methode uit BaseUnit.
+                UnitManager.instance.HeroActionDone(); // De held heeft zijn actie gedaan: deselecteren en de beurt naar de vijanden.
             }
         }
     }

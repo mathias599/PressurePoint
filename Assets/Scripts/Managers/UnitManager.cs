@@ -1,4 +1,5 @@
 using NUnit.Framework; // Geeft toegang tot NUnit-testfunctionaliteiten. Wordt hier momenteel niet gebruikt.
+using System.Collections; // Geeft toegang tot IEnumerator, nodig voor coroutines.
 using System.Collections.Generic; // Geeft toegang tot collecties zoals List.
 using System.Linq; // Geeft toegang tot LINQ om gegevens te filteren en sorteren.
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Instantiate en Random.
@@ -9,6 +10,11 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
 
     private List<ScriptableUnit> units; // Maakt een lijst waarin alle beschikbare ScriptableUnit-objecten worden opgeslagen.
     public BaseHero selectedHero; // Bewaart welke held momenteel geselecteerd is.
+
+    public List<BaseHero> heroes = new List<BaseHero>(); // Lijst met alle levende helden op het speelveld.
+    public List<BaseEnemy> enemies = new List<BaseEnemy>(); // Lijst met alle levende vijanden op het speelveld.
+
+    [SerializeField] private float enemyActionDelay = 0.5f; // Wachttijd in seconden tussen de acties van de vijanden, zodat de speler kan volgen wat er gebeurt.
 
     private void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen.
     {
@@ -28,10 +34,10 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
             var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile(); // Vraagt aan GridManager om een willekeurige vrije spawntegel voor de held.
 
             randomSpawnTile.SetUnit(spawnedHero); // Plaatst de aangemaakte held op de gekozen tegel.
-
-            GameManager.Instance.ChangeState(GameManager.GameState.SpawnEnemies); // Verandert de spelstatus naar SpawnEnemies zodat daarna de vijanden aangemaakt worden.
-
+            heroes.Add(spawnedHero); // Voegt de held toe aan de lijst met helden.
         }
+
+        GameManager.Instance.ChangeState(GameManager.GameState.SpawnEnemies); // Verandert de spelstatus naar SpawnEnemies zodat daarna de vijanden aangemaakt worden. Staat buiten de loop zodat dit maar één keer gebeurt.
     }
 
     public void SpawnEnemies() // Methode die de vijanden aanmaakt en op het speelveld plaatst.
@@ -45,9 +51,10 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile(); // Vraagt aan GridManager om een willekeurige vrije spawntegel voor de vijand.
 
             randomSpawnTile.SetUnit(spawnedEnemy); // Plaatst de aangemaakte vijand op de gekozen tegel.
-
-            GameManager.Instance.ChangeState(GameManager.GameState.HeroesTurn); // Verandert de spelstatus naar HeroesTurn zodat de helden aan de beurt zijn.
+            enemies.Add(spawnedEnemy); // Voegt de vijand toe aan de lijst met vijanden.
         }
+
+        GameManager.Instance.ChangeState(GameManager.GameState.HeroesTurn); // Verandert de spelstatus naar HeroesTurn zodat de helden aan de beurt zijn. Staat buiten de loop zodat dit maar één keer gebeurt.
     }
 
 
@@ -60,5 +67,42 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
     {
         selectedHero = hero; // Slaat de doorgegeven held op als de momenteel geselecteerde held.
         MenuManager.instance.ShowSelectedHero(hero); // Geeft de held door aan MenuManager, die zijn naam toont of de informatie verbergt als hero null is.
+    }
+
+    public void RemoveUnit(BaseUnit unit) // Haalt een gestorven unit uit de juiste lijst.
+    {
+        if (unit is BaseHero h) heroes.Remove(h); // Als de unit een held is, wordt hij uit de heldenlijst verwijderd.
+        if (unit is BaseEnemy e) enemies.Remove(e); // Als de unit een vijand is, wordt hij uit de vijandenlijst verwijderd.
+    }
+
+    public void HeroActionDone() // Wordt aangeroepen wanneer de held zijn actie gedaan heeft (verplaatsen of aanvallen).
+    {
+        SetSelectedHero(null); // Deselecteert de held.
+        GameManager.Instance.ChangeState(GameManager.GameState.EnemiesTurn); // Geeft de beurt door aan de vijanden.
+    }
+
+    public void StartEnemyTurn() // Start de beurt van de vijanden. Wordt aangeroepen door GameManager.
+    {
+        StartCoroutine(EnemyTurnRoutine()); // Start een coroutine zodat we tussen de acties kunnen wachten.
+    }
+
+    private IEnumerator EnemyTurnRoutine() // Coroutine die alle vijanden één voor één hun beurt laat doen.
+    {
+        yield return new WaitForSeconds(enemyActionDelay); // Wacht even voordat de eerste vijand begint.
+
+        foreach (var enemy in enemies.ToList()) // Loopt over een kopie van de lijst, omdat units kunnen sterven tijdens de beurt.
+        {
+            if (enemy == null) continue; // Slaat vijanden over die ondertussen vernietigd zijn.
+            enemy.TakeTurn(); // Laat de vijand zijn actie kiezen en uitvoeren.
+            yield return new WaitForSeconds(enemyActionDelay); // Wacht even voor de volgende vijand.
+        }
+
+        if (heroes.Count == 0) // Controleert of er nog helden over zijn.
+        {
+            Debug.Log("Game over"); // Alle helden zijn dood.
+            yield break; // Stopt de coroutine; de beurt gaat niet terug naar de helden.
+        }
+
+        GameManager.Instance.ChangeState(GameManager.GameState.HeroesTurn); // Geeft de beurt terug aan de helden.
     }
 }
