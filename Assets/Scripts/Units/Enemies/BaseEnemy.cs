@@ -1,4 +1,6 @@
 using System.Linq; // Geeft toegang tot LINQ om gegevens te filteren en sorteren.
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Vector2 en Mathf.
 
 public class BaseEnemy : BaseUnit // Maakt de klasse BaseEnemy aan. Deze erft alles van BaseUnit. Dit is de basisklasse van alle vijanden.
@@ -6,24 +8,27 @@ public class BaseEnemy : BaseUnit // Maakt de klasse BaseEnemy aan. Deze erft al
     private static readonly Vector2[] directions = // De vier richtingen waarin een vijand kan stappen (geen diagonalen).
         { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
-    public virtual void TakeTurn() // Wordt aangeroepen door UnitManager tijdens EnemiesTurn. Virtual: een specifieke vijand kan zijn eigen gedrag schrijven.
+    public virtual async Task TakeTurn() // Wordt aangeroepen door UnitManager tijdens EnemiesTurn. Virtual: een specifieke vijand kan zijn eigen gedrag schrijven.
     {
-        var target = GetClosestHero(); // Zoekt de dichtstbijzijnde held.
-        if (target == null) return; // Geen helden meer: niets te doen.
-
-        if (IsAdjacentTo(target)) // Staat de held direct naast deze vijand?
+        for (int i = 5; i > 0; i--)
         {
-            Attack(target); // Aanvallen met dezelfde Attack-methode die de held gebruikt.
-            return; // Eén actie per beurt, net als de held.
+            var target = GetClosestHero(); // Zoekt de dichtstbijzijnde held.
+            if (target == null) return; // Geen helden meer: niets te doen.
+
+            if (IsAdjacentTo(target)) // Staat de held direct naast deze vijand?
+            {
+                Attack(target); // Aanvallen met dezelfde Attack-methode die de held gebruikt.
+            }
+
+            for (int j = 0; j < moveRange; j++) // Loopt maximaal moveRange stappen richting de held.
+            {
+                var next = GetStepTowards(target); // Zoekt de beste buurtegel richting de held.
+                if (next == null) break; // Geen betere tegel gevonden (bv. geblokkeerd): stoppen.
+                MoveTo(next); // Verplaatsen met dezelfde MoveTo-methode die de held gebruikt.
+                if (IsAdjacentTo(target)) break; // Naast de held aangekomen: niet verder lopen.
+            }
         }
 
-        for (int i = 0; i < moveRange; i++) // Loopt maximaal moveRange stappen richting de held.
-        {
-            var next = GetStepTowards(target); // Zoekt de beste buurtegel richting de held.
-            if (next == null) break; // Geen betere tegel gevonden (bv. geblokkeerd): stoppen.
-            MoveTo(next); // Verplaatsen met dezelfde MoveTo-methode die de held gebruikt.
-            if (IsAdjacentTo(target)) break; // Naast de held aangekomen: niet verder lopen.
-        }
     }
 
     protected BaseHero GetClosestHero() // Geeft de held terug die het dichtst bij deze vijand staat.
