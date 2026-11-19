@@ -13,6 +13,7 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
 
     public bool walkable => isWalkable && occupiedUnit == null; // Controleert of de tegel bewandelbaar is EN of er geen unit op staat. Beide voorwaarden moeten true zijn.
     public bool canPassThrough => isWalkable && !(occupiedUnit is BaseHero);
+    public bool isOnPath;
 
     public virtual void Init(int x, int y) // Methode die een tegel initialiseert met zijn x- en y-coördinaten. Virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
@@ -23,13 +24,17 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
     {
         highlight.SetActive(true); // Activeert het highlight-effect zodat de tegel oplicht.
         MenuManager.instance.ShowTileInfo(this); // Toont informatie over deze tegel in het menu. this verwijst naar deze tegel.
-        UnitManager.instance.AddTileToPath(this);
     }
 
     private void OnMouseExit() // Wordt automatisch uitgevoerd wanneer de muis de tegel verlaat.
     {
-        highlight.SetActive(false); // Deactiveert het highlight-effect zodat de tegel niet meer oplicht.
+        highlight.SetActive(isOnPath);
         MenuManager.instance.ShowTileInfo(null); // Verbergt de getoonde tegelinformatie in het menu.
+    }
+    public void SetOnPath(bool onPath)
+    {
+        isOnPath = onPath;
+        highlight.SetActive(onPath);
     }
     private void OnMouseUp()
     {
@@ -56,14 +61,7 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
 
             else // Wordt uitgevoerd wanneer de unit geen held is, dus een vijand.
             {
-                Debug.Log("Tegenstander op tile"); // Toont in de Console dat er een tegenstander op de tegel staat.
-                if (UnitManager.instance.selectedHero != null) // Controleert of er momenteel een held geselecteerd is.
-                {
-                    Debug.Log("Damaged Enemy"); // Toont in de Console dat de vijand schade krijgt.
-                    var enemy = (BaseEnemy)occupiedUnit; // Zet de bezette unit om naar BaseEnemy zodat we de vijand-specifieke klasse kunnen gebruiken.
-                    enemy.TakeDamage(UnitManager.instance.selectedHero.attackDamage); // Doet schade aan de vijand, gelijk aan de attackDamage van de geselecteerde held.
-                    UnitManager.instance.SetSelectedHero(null); // Deselecteert de held nadat de aanval uitgevoerd is.
-                }
+                Debug.Log("Tegenstander op tile"); // Toont in de Console dat er een tegenstander op de tegel staat. Schade doe je door met de held door de vijand te lopen.
             }
         }
     }

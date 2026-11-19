@@ -2,6 +2,7 @@ using NUnit.Framework; // Geeft toegang tot NUnit-testfunctionaliteiten. Wordt h
 using System.Collections.Generic; // Geeft toegang tot collecties zoals List.
 using System.Linq; // Geeft toegang tot LINQ om gegevens te filteren en sorteren.
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Instantiate en Random.
+using UnityEngine.InputSystem; // Geeft toegang tot het nieuwe Input System, hier gebruikt om de muispositie te lezen.
 
 public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Deze beheert het aanmaken en selecteren van units.
 {
@@ -17,6 +18,34 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
         instance = this; // Slaat deze UnitManager op als de globale instance.
 
         units = Resources.LoadAll<ScriptableUnit>("Units").ToList(); // Laadt alle ScriptableUnit-assets uit de map Resources/Units en zet ze om naar een List.
+    }
+
+    private void Update() // Wordt elke frame uitgevoerd. Volgt de muis terwijl je een route tekent.
+    {
+        if (!isDrawingPath) return; // Als er geen route getekend wordt, hoeft er niks te gebeuren.
+
+        Vector2 mouseWorld = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // Zet de muispositie op het scherm om naar een positie in de spelwereld.
+        Vector2 mouseTilePos = new Vector2(Mathf.Round(mouseWorld.x), Mathf.Round(mouseWorld.y)); // Rondt af naar hele getallen, want tiles staan op hele posities. Zo weten we op welke tile de muis staat.
+
+        for (int i = 0; i < 20; i++) // Zet stap voor stap tiles bij tot aan de muis. 20 is een veiligheidsgrens zodat de lus nooit eindeloos doorgaat.
+        {
+            Vector2 lastPos = drawnPath[drawnPath.Count - 1].transform.position; // Positie van de laatste tile in de route.
+            if (lastPos == mouseTilePos) break; // De route is bij de muis aangekomen, dus stoppen.
+
+            Vector2 difference = mouseTilePos - lastPos; // Hoe ver de muis nog van de laatste tile af is, in x en y.
+            Vector2 step; // De richting van de volgende stap: 1 tile naar links, rechts, omhoog of omlaag.
+            if (Mathf.Abs(difference.x) >= Mathf.Abs(difference.y)) // Als de muis horizontaal verder weg is dan verticaal...
+                step = new Vector2(Mathf.Sign(difference.x), 0); // ...zet dan een stap naar links of rechts. Mathf.Sign geeft -1 of 1.
+            else // Anders is de muis verticaal verder weg...
+                step = new Vector2(0, Mathf.Sign(difference.y)); // ...dus zet een stap omhoog of omlaag.
+
+            Tile nextTile = GridManager.Instance.GetAtPosition(lastPos + step); // Zoekt de tile op de plek van de volgende stap.
+            if (nextTile == null) break; // Buiten het speelveld, dus stoppen.
+
+            int countBefore = drawnPath.Count; // Onthoudt hoe lang de route was vóór deze stap.
+            AddTileToPath(nextTile); // Probeert de tile toe te voegen. Bij een stap terug wordt de laatste tile juist weggehaald.
+            if (drawnPath.Count == countBefore) break; // Er is niks veranderd (berg, buiten bereik, ...), dus stoppen.
+        }
     }
 
     public void SpawnHeroes() // Methode die de helden aanmaakt en op het speelveld plaatst.
@@ -79,9 +108,9 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
 
         int last = drawnPath.Count - 1;
 
-        // Terug naar de vorige tile = laatste stap ongedaan maken
         if (last > 0 && tile == drawnPath[last - 1])
         {
+            drawnPath[last].SetOnPath(false);
             drawnPath.RemoveAt(last);
             return;
         }
@@ -95,6 +124,7 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
         if (difference.magnitude > 1.1f) return;
 
         drawnPath.Add(tile);
+        tile.SetOnPath(true);
     }
 
     public void FinishDrawingPath()
@@ -104,9 +134,9 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
 
         drawnPath.RemoveAt(0); // De starttile hoeft hij niet te lopen
 
-        // Hij mag niet eindigen op een tile waar iemand staat
         while (drawnPath.Count > 0 && !drawnPath[drawnPath.Count - 1].walkable)
         {
+            drawnPath[drawnPath.Count - 1].SetOnPath(false);
             drawnPath.RemoveAt(drawnPath.Count - 1);
         }
 
