@@ -1,4 +1,3 @@
-using NUnit.Framework; // Geeft toegang tot NUnit-testfunctionaliteiten. Wordt hier momenteel niet gebruikt.
 using System.Collections; // Geeft toegang tot IEnumerator, nodig voor coroutines.
 using System.Collections.Generic; // Geeft toegang tot collecties zoals List.
 using System.Linq; // Geeft toegang tot LINQ om gegevens te filteren en sorteren.
@@ -11,8 +10,8 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
 
     private List<ScriptableUnit> units; // Maakt een lijst waarin alle beschikbare ScriptableUnit-objecten worden opgeslagen.
     public BaseHero selectedHero; // Bewaart welke held momenteel geselecteerd is.
-    public List<Tile> drawnPath = new List<Tile>();
-    public bool isDrawingPath;
+    public List<Tile> drawnPath = new List<Tile>(); // De route die de speler met de muis tekent. De eerste tegel is de tegel waar de held staat.
+    public bool isDrawingPath; // Is true zolang de speler een route aan het tekenen is.
 
     public List<BaseHero> heroes = new List<BaseHero>(); // Lijst met alle levende helden op het speelveld.
     public List<BaseEnemy> enemies = new List<BaseEnemy>(); // Lijst met alle levende vijanden op het speelveld.
@@ -99,59 +98,60 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
         selectedHero = hero; // Slaat de doorgegeven held op als de momenteel geselecteerde held.
         MenuManager.instance.ShowSelectedHero(hero); // Geeft de held door aan MenuManager, die zijn naam toont of de informatie verbergt als hero null is.
     }
-    public void StartDrawingPath(BaseHero hero)
+
+    public void StartDrawingPath(BaseHero hero) // Methode die begint met het tekenen van een route voor de aangeklikte held.
     {
-        if (hero.isMoving) return;
+        if (hero.isMoving) return; // Als de held nog aan het lopen is, mag je geen nieuwe route tekenen.
         if (GameManager.Instance.State != GameManager.GameState.HeroesTurn) return; // Alleen tekenen tijdens de beurt van de helden.
 
-        SetSelectedHero(hero);
-        drawnPath.Clear();
-        drawnPath.Add(hero.occupiedTile);
-        isDrawingPath = true;
+        SetSelectedHero(hero); // Selecteert de held.
+        drawnPath.Clear(); // Maakt de oude route leeg.
+        drawnPath.Add(hero.occupiedTile); // Zet de tegel van de held als eerste in de route.
+        isDrawingPath = true; // Vanaf nu wordt er een route getekend.
     }
 
-    public void AddTileToPath(Tile tile)
+    public void AddTileToPath(Tile tile) // Methode die een tegel aan de getekende route toevoegt, als dat mag.
     {
-        if (!isDrawingPath) return;
+        if (!isDrawingPath) return; // Als er geen route getekend wordt, niks doen.
 
-        int last = drawnPath.Count - 1;
+        int last = drawnPath.Count - 1; // De plek van de laatste tegel in de route.
 
-        if (last > 0 && tile == drawnPath[last - 1])
+        if (last > 0 && tile == drawnPath[last - 1]) // Gaat de muis terug naar de vorige tegel?
         {
-            drawnPath[last].SetOnPath(false);
-            drawnPath.RemoveAt(last);
-            return;
+            drawnPath[last].SetOnPath(false); // Zet de highlight van de laatste tegel uit.
+            drawnPath.RemoveAt(last); // Haalt de laatste tegel uit de route (een stap ongedaan maken).
+            return; // Stopt de methode.
         }
 
-        if (drawnPath.Contains(tile)) return;
-        if (last >= selectedHero.moveRange) return;
-        if (!tile.canPassThrough) return;
+        if (drawnPath.Contains(tile)) return; // Deze tegel zit al in de route, dus niet nog eens toevoegen.
+        if (last >= selectedHero.moveRange) return; // De held heeft al zijn stappen gebruikt.
+        if (!tile.canPassThrough) return; // Op deze tegel kan de held niet komen (berg of een andere held).
 
         // Alleen tiles direct naast de vorige, dus niet schuin
-        Vector2 difference = tile.transform.position - drawnPath[last].transform.position;
-        if (difference.magnitude > 1.1f) return;
+        Vector2 difference = tile.transform.position - drawnPath[last].transform.position; // Verschil in positie tussen deze tegel en de laatste tegel van de route.
+        if (difference.magnitude > 1.1f) return; // De tegel ligt niet direct naast de vorige (te ver of schuin), dus niet toevoegen.
 
-        drawnPath.Add(tile);
-        tile.SetOnPath(true);
+        drawnPath.Add(tile); // Voegt de tegel toe aan de route.
+        tile.SetOnPath(true); // Laat de tegel oplichten.
     }
 
-    public void FinishDrawingPath()
+    public void FinishDrawingPath() // Methode die wordt uitgevoerd als de speler de muis loslaat. Laat de held de route lopen.
     {
-        if (!isDrawingPath) return;
-        isDrawingPath = false;
+        if (!isDrawingPath) return; // Als er geen route getekend werd, niks doen.
+        isDrawingPath = false; // Het tekenen is gestopt.
 
         drawnPath.RemoveAt(0); // De starttile hoeft hij niet te lopen
 
-        while (drawnPath.Count > 0 && !drawnPath[drawnPath.Count - 1].walkable)
+        while (drawnPath.Count > 0 && !drawnPath[drawnPath.Count - 1].walkable) // Zolang de laatste tegel bezet is (bv. door de Ghoul)...
         {
-            drawnPath[drawnPath.Count - 1].SetOnPath(false);
-            drawnPath.RemoveAt(drawnPath.Count - 1);
+            drawnPath[drawnPath.Count - 1].SetOnPath(false); // ...zet zijn highlight uit...
+            drawnPath.RemoveAt(drawnPath.Count - 1); // ...en haal hem uit de route, want de held mag niet eindigen op een bezette tegel.
         }
 
-        if (drawnPath.Count == 0) return;
+        if (drawnPath.Count == 0) return; // Er is geen route over, dus de held blijft staan.
 
         StartCoroutine(HeroMoveRoutine(selectedHero, new List<Tile>(drawnPath))); // Laat de held de route lopen en geeft daarna de beurt door.
-        SetSelectedHero(null);
+        SetSelectedHero(null); // Deselecteert de held.
     }
 
     private IEnumerator HeroMoveRoutine(BaseHero hero, List<Tile> path) // Wacht tot de held klaar is met lopen en geeft dan de beurt aan de vijanden.
@@ -184,7 +184,7 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
         foreach (var enemy in enemies.ToList()) // Loopt over een kopie van de lijst, omdat units kunnen sterven tijdens de beurt.
         {
             if (enemy == null) continue; // Slaat vijanden over die ondertussen vernietigd zijn.
-            enemy.TakeTurn(); // Laat de vijand zijn actie kiezen en uitvoeren.
+            yield return enemy.StartCoroutine(enemy.TakeTurn()); // Laat de vijand zijn beurt doen en wacht tot hij helemaal klaar is.
             yield return new WaitForSeconds(enemyActionDelay); // Wacht even voor de volgende vijand.
         }
 
