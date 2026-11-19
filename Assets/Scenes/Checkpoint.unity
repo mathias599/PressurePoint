@@ -407,7 +407,7 @@ MonoBehaviour:
   target: {fileID: 0}
   followEnemy: 0
   heightAboveUnit: 0.7
-  damageWithH: 0
+  damageWithH: 1
 --- !u!1 &568817115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1473,9 @@ MonoBehaviour:
   selectedHero: {fileID: 0}
   drawnPath: []
   isDrawingPath: 0
+  heroes: []
+  enemies: []
+  enemyActionDelay: 0.5
 --- !u!4 &1386278304
 Transform:
   m_ObjectHideFlags: 0
