@@ -1,6 +1,9 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq; // Geeft toegang tot LINQ om gegevens te filteren en sorteren.
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEditor.UI;
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Vector2 en Mathf.
 
 public class BaseEnemy : BaseUnit // Maakt de klasse BaseEnemy aan. Deze erft alles van BaseUnit. Dit is de basisklasse van alle vijanden.
