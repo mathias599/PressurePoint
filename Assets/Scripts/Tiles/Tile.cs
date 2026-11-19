@@ -12,6 +12,14 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
     public bool walkable => isWalkable && occupiedUnit == null; // Controleert of de tegel bewandelbaar is EN of er geen unit op staat. Beide voorwaarden moeten true zijn.
     public bool canPassThrough => isWalkable && !(occupiedUnit is BaseHero); // Is true als een held door deze tegel mag lopen: geen berg en geen andere held. Een vijand mag er wel staan.
     public bool isOnPath; // Is true als deze tegel op de getekende route ligt.
+    public bool isInRange; // Is true als deze tile in het schietbereik van de boog ligt.
+    public bool blocksArrows => !isWalkable; // Bergen houden pijlen tegen.
+
+    public void SetInRange(bool inRange) // Zet een tile in het schietbereik of haalt hem eruit.
+    {
+        isInRange = inRange; // Onthoudt of de tile in het bereik ligt.
+        highlight.SetActive(inRange || isOnPath); // Laat de tile oplichten als hij in bereik of op de route ligt.
+    }
 
     public virtual void Init(int x, int y) // Methode die een tegel initialiseert met zijn x- en y-coördinaten. Virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
@@ -26,7 +34,7 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
 
     private void OnMouseExit() // Wordt automatisch uitgevoerd wanneer de muis de tegel verlaat.
     {
-        highlight.SetActive(isOnPath); // Laat de highlight aan als de tegel op de route ligt, en zet hem anders uit.
+        highlight.SetActive(isOnPath || isInRange); // Blijft oplichten als de tile op de route of in het schietbereik ligt. // Laat de highlight aan als de tegel op de route ligt, en zet hem anders uit.
         MenuManager.instance.ShowTileInfo(null); // Verbergt de getoonde tegelinformatie in het menu.
     }
 
@@ -48,6 +56,11 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
         {
             Debug.Log("Niet de heroes turn"); // Toont een bericht in de Console dat het niet de beurt van de helden is.
             return; // Stopt de methode onmiddellijk zodat de rest van de code niet uitgevoerd wordt.
+        }
+        if (UnitManager.instance.isAiming)
+        {
+            UnitManager.instance.TryShoot(this);
+            return;
         }
 
         if (occupiedUnit != null) // Controleert of er al een unit op deze tegel staat.

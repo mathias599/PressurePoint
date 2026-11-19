@@ -12,6 +12,9 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
     public BaseHero selectedHero; // Bewaart welke held momenteel geselecteerd is.
     public List<Tile> drawnPath = new List<Tile>(); // De route die de speler met de muis tekent. De eerste tegel is de tegel waar de held staat.
     public bool isDrawingPath; // Is true zolang de speler een route aan het tekenen is.
+    public bool isAiming; // Is true als de speler met de boog aan het richten is.
+    private BaseHero aimingHero; // De held die aan het richten is.
+    private List<Tile> rangeTiles = new List<Tile>(); // Alle tiles in het schietbereik.
 
     public List<BaseHero> heroes = new List<BaseHero>(); // Lijst met alle levende helden op het speelveld.
     public List<BaseEnemy> enemies = new List<BaseEnemy>(); // Lijst met alle levende vijanden op het speelveld.
@@ -27,6 +30,7 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
 
     private void Update() // Wordt elke frame uitgevoerd. Volgt de muis terwijl je een route tekent.
     {
+        if (Keyboard.current.bKey.wasPressedThisFrame) ToggleBow(); // B = boog tevoorschijn halen of wegdoen.
         if (!isDrawingPath) return; // Als er geen route getekend wordt, hoeft er niks te gebeuren.
 
         Vector2 mouseWorld = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()); // Zet de muispositie op het scherm om naar een positie in de spelwereld.
@@ -195,5 +199,79 @@ public class UnitManager : MonoBehaviour // Maakt de klasse UnitManager aan. Dez
         }
 
         GameManager.Instance.ChangeState(GameManager.GameState.HeroesTurn); // Geeft de beurt terug aan de helden.
+    }
+    public void ToggleBow() // Haalt de boog tevoorschijn of doet hem weg.
+    {
+        if (isAiming) { StopAiming(); return; } // Was je al aan het richten? Dan doet B de boog weg.
+
+        if (GameManager.Instance.State != GameManager.GameState.HeroesTurn) return; // Alleen tijdens jouw beurt.
+        if (isDrawingPath || heroes.Count == 0) return; // Niet tijdens het tekenen van een route, en alleen als er een held is.
+
+        BaseHero hero = heroes[0]; // De eerste held (de Knight).
+        if (!hero.hasBow || hero.isMoving) return; // Geen boog of nog aan het lopen? Dan niks doen.
+        if (hero.arrowsLeft <= 0) return; // Geen pijlen meer: de boog kan niet tevoorschijn komen.
+
+        aimingHero = hero; // Onthoudt welke held richt.
+        isAiming = true; // Vanaf nu ben je aan het richten.
+        if (hero.bowObject != null) hero.bowObject.SetActive(true); // Laat het boog-plaatje zien.
+
+        for (int x = -hero.bowRange; x <= hero.bowRange; x++) // Loopt over alle kolommen van het schietvak (bij bowRange 3 is dat 7x7).
+        {
+            for (int y = -hero.bowRange; y <= hero.bowRange; y++) // Loopt over alle rijen van het schietvak.
+            {
+                if (x == 0 && y == 0) continue; // De tile waar de held zelf staat, slaan we over.
+
+                Tile tile = GridManager.Instance.GetAtPosition(hero.GridPos + new Vector2(x, y)); // Zoekt de tile op die plek.
+                if (tile == null) continue; // Buiten het speelveld: overslaan.
+
+                tile.SetInRange(true); // Laat de tile oplichten.
+                rangeTiles.Add(tile); // Onthoudt de tile, zodat we hem later weer uit kunnen zetten.
+            }
+        }
+    }
+
+    private void StopAiming() // Stopt met richten en doet de boog weg.
+    {
+        foreach (Tile tile in rangeTiles) tile.SetInRange(false); // Zet alle tiles in het bereik weer uit.
+        rangeTiles.Clear(); // Maakt de lijst leeg.
+
+        if (aimingHero != null && aimingHero.bowObject != null) aimingHero.bowObject.SetActive(false); // Verbergt het boog-plaatje.
+        aimingHero = null; // Er richt geen held meer.
+        isAiming = false; // Niet meer aan het richten.
+    }
+
+    public void TryShoot(Tile target) // Probeert te schieten op de aangeklikte tile.
+    {
+        if (!rangeTiles.Contains(target)) return; // De tile ligt buiten het bereik.
+        if (!(target.occupiedUnit is BaseEnemy enemy)) return; // Er staat geen vijand op die tile.
+
+        if (!HasLineOfSight(aimingHero.occupiedTile, target)) // Staat er iets tussen de held en de vijand?
+        {
+            Debug.Log("Er staat iets in de weg!"); // Toont in de Console dat het schot geblokkeerd is.
+            return;
+        }
+
+        enemy.TakeDamage(aimingHero.bowDamage); // Doet schade aan de vijand.
+        aimingHero.arrowsLeft--; // Haalt één pijl af. Moet vóór StopAiming, want die maakt aimingHero leeg.
+        StopAiming(); // Doet de boog weg en zet het bereik uit.
+        HeroActionDone(); // Schieten kost je beurt, daarna is de vijand aan de beurt.
+    }
+
+    private bool HasLineOfSight(Tile from, Tile to) // Controleert of er niks tussen twee tiles staat.
+    {
+        Vector2 start = from.transform.position; // Positie van de held.
+        Vector2 end = to.transform.position; // Positie van de vijand.
+        int samples = Mathf.CeilToInt(Vector2.Distance(start, end) * 10); // 10 controles per tile afstand.
+
+        for (int i = 1; i < samples; i++) // Loopt over punten op de lijn tussen held en vijand.
+        {
+            Vector2 point = Vector2.Lerp(start, end, (float)i / samples); // Een punt op de lijn.
+            Vector2 tilePos = new Vector2(Mathf.Round(point.x), Mathf.Round(point.y)); // Op welke tile ligt dat punt?
+            Tile tile = GridManager.Instance.GetAtPosition(tilePos); // Haalt die tile op.
+
+            if (tile == null || tile == from || tile == to) continue; // De start- en doeltile tellen niet mee.
+            if (tile.blocksArrows || tile.occupiedUnit != null) return false; // Berg of unit in de weg: niet schieten.
+        }
+        return true; // Niks in de weg: je kunt schieten.
     }
 }
