@@ -18,15 +18,13 @@ public class BaseEnemy : BaseUnit // Maakt de klasse BaseEnemy aan. Deze erft al
             if (IsAdjacentTo(target)) // Staat de held direct naast deze vijand?
             {
                 Attack(target); // Aanvallen met dezelfde Attack-methode die de held gebruikt.
+                return;
             }
 
-            for (int j = 0; j < moveRange; j++) // Loopt maximaal moveRange stappen richting de held.
-            {
                 var next = GetStepTowards(target); // Zoekt de beste buurtegel richting de held.
                 if (next == null) break; // Geen betere tegel gevonden (bv. geblokkeerd): stoppen.
                 MoveTo(next); // Verplaatsen met dezelfde MoveTo-methode die de held gebruikt.
-                if (IsAdjacentTo(target)) break; // Naast de held aangekomen: niet verder lopen.
-            }
+                if (IsAdjacentTo(target)) continue; // Naast de held aangekomen: niet verder lopen.
         }
 
     }
