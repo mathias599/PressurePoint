@@ -24,9 +24,9 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
     public IEnumerator GlideTo(Tile tile) // Verplaatst de unit langzaam naar de tegel
     {
         Vector3 target = tile.transform.position; // Waar de unit naartoe moet
-        while (transform.position != target)
+        while (transform.position != target) // Herhaalt tot de unit op de tegel staat.
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime); // Schuift de unit een klein stukje richting de tegel, afhankelijk van moveSpeed.
             yield return null; // Wacht één frame
         }
         tile.SetUnit(this); // Zet de unit officieel op de tegel
@@ -77,34 +77,35 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
         UnitManager.instance.RemoveUnit(this); // Haalt de unit uit de lijsten van UnitManager zodat dode units geen beurt meer krijgen.
         Destroy(gameObject); // Verwijdert het volledige GameObject van de unit uit de scène.
     }
-    public IEnumerator MoveAlongPath(List<Tile> path)
+
+    public IEnumerator MoveAlongPath(List<Tile> path) // Coroutine die de unit tegel voor tegel over de route laat lopen. path is de lijst met tegels.
     {
-        isMoving = true;
+        isMoving = true; // De unit is aan het lopen.
 
-        foreach (Tile tile in path)
+        foreach (Tile tile in path) // Loopt elke tegel van de route af.
         {
-            Vector3 targetPosition = tile.transform.position;
+            Vector3 targetPosition = tile.transform.position; // De positie van de volgende tegel.
 
-            while (transform.position != targetPosition)
+            while (transform.position != targetPosition) // Herhaalt tot de unit op de tegel staat.
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-                yield return null;
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime); // Schuift de unit een klein stukje richting de tegel, afhankelijk van moveSpeed.
+                yield return null; // Wacht tot de volgende frame, zodat je de unit ziet bewegen.
             }
 
-            tile.SetOnPath(false);
-            BaseUnit unitOnTile = tile.occupiedUnit;
+            tile.SetOnPath(false); // Zet de highlight van deze tegel uit, want de unit is er nu.
+            BaseUnit unitOnTile = tile.occupiedUnit; // Kijkt welke unit er op deze tegel staat.
 
-            if (unitOnTile != null && unitOnTile.faction != faction)
+            if (unitOnTile != null && unitOnTile.faction != faction) // Staat er een unit van de andere factie (een vijand)?
             {
-                unitOnTile.TakeDamage(attackDamage);
+                unitOnTile.TakeDamage(attackDamage); // Doet schade aan die vijand.
             }
 
-            if (tile.occupiedUnit == null)
+            if (tile.occupiedUnit == null) // Is de tegel leeg (of is de vijand net gestorven)?
             {
-                tile.SetUnit(this);
+                tile.SetUnit(this); // Zet de unit op deze tegel. Leeft de vijand nog, dan loopt de unit er gewoon doorheen.
             }
         }
 
-        isMoving = false;
+        isMoving = false; // De unit is klaar met lopen.
     }
 }
