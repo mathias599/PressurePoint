@@ -54,6 +54,7 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
                 yield return null;
             }
+
             tile.SetOnPath(false);
             BaseUnit unitOnTile = tile.occupiedUnit;
 
