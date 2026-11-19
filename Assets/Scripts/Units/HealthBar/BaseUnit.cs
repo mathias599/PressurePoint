@@ -1,4 +1,5 @@
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Mathf en Destroy.
+using System.Collections; //nodig voor inumerator
 public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de basisklasse van alle helden en vijanden.
 {
     public string unitName; // Bewaart de naam van de unit.
@@ -10,12 +11,18 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
     public int currentHealth; // Bewaart de huidige hoeveelheid levenspunten.
     public int attackDamage = 3; // Bepaalt hoeveel schade deze unit doet bij een aanval.
     public int moveRange = 1; // Bepaalt hoeveel tegels deze unit per beurt mag lopen. Wordt gebruikt door de vijand-AI.
+    public float moveSpeed = 2f; // Hoe snel de unit glijdt (tegels per seconde)
 
     protected virtual void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen. Protected virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
         currentHealth = maxHealth; // Zet de huidige levenspunten gelijk aan de maximale levenspunten bij het starten.
     }
 
+        public IEnumerator GlideTo(Tile tile) // Verplaatst de unit langzaam naar de tegel
+    {
+        Vector3 start = transform.position; // Onthoud waar de unit nu staat
+
+    }
     // ---- Gedeelde acties: helden en vijanden gebruiken exact dezelfde methodes ----
 
     public void MoveTo(Tile tile) // Verplaatst deze unit naar de opgegeven tegel.
