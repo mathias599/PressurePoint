@@ -1,6 +1,6 @@
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Mathf en Destroy.
-using System.Collections;
-using System.Collections.Generic;
+using System.Collections; // Nodig voor IEnumerator (coroutines).
+using System.Collections.Generic; // Nodig voor List.
 
 public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de basisklasse van alle helden en vijanden.
 {
@@ -12,14 +12,49 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
     public int maxHealth = 10; // Bepaalt de maximale hoeveelheid levenspunten van de unit.
     public int currentHealth; // Bewaart de huidige hoeveelheid levenspunten.
     public int attackDamage = 3; // Bepaalt hoeveel schade deze unit doet bij een aanval.
-    public int moveRange = 3;
-    public float moveSpeed = 4f;
-    public bool isMoving;
+    public int moveRange = 3; // Hoeveel tegels deze unit per beurt mag lopen. Gebruikt door de route van de held en de vijand-AI.
+    public float moveSpeed = 4f; // Hoe snel de unit glijdt (tegels per seconde).
+    public bool isMoving; // True zolang de unit aan het lopen is.
 
     protected virtual void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen. Protected virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
         currentHealth = maxHealth; // Zet de huidige levenspunten gelijk aan de maximale levenspunten bij het starten.
     }
+
+    public IEnumerator GlideTo(Tile tile) // Verplaatst de unit langzaam naar de tegel
+    {
+        Vector3 target = tile.transform.position; // Waar de unit naartoe moet
+        while (transform.position != target) // Herhaalt tot de unit op de tegel staat.
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime); // Schuift de unit een klein stukje richting de tegel, afhankelijk van moveSpeed.
+            yield return null; // Wacht één frame
+        }
+        tile.SetUnit(this); // Zet de unit officieel op de tegel
+    }
+
+    // ---- Gedeelde acties: helden en vijanden gebruiken exact dezelfde methodes ----
+
+    public void MoveTo(Tile tile) // Verplaatst deze unit naar de opgegeven tegel.
+    {
+        tile.SetUnit(this); // Laat de tegel de unit plaatsen. SetUnit maakt ook de vorige tegel vrij.
+    }
+
+    public void Attack(BaseUnit target) // Valt een andere unit aan.
+    {
+        target.TakeDamage(attackDamage); // Doet schade aan het doelwit, gelijk aan de attackDamage van deze unit.
+    }
+
+    public Vector2 GridPos => occupiedTile.transform.position; // Geeft de positie van deze unit op het raster. De tegels staan precies op hun x- en y-coördinaat.
+
+    public int DistanceTo(BaseUnit other) // Berekent hoeveel stappen (zonder diagonalen) deze unit van een andere unit verwijderd is.
+    {
+        var d = GridPos - other.GridPos; // Berekent het verschil in x en y tussen beide units.
+        return (int)(Mathf.Abs(d.x) + Mathf.Abs(d.y)); // Telt de absolute verschillen op. Dit heet de Manhattan-afstand.
+    }
+
+    public bool IsAdjacentTo(BaseUnit other) => DistanceTo(other) == 1; // Geeft true als de andere unit direct boven, onder, links of rechts staat.
+
+    // ------------------------------------------------------------------------------
 
     public void TakeDamage(int amount) // Methode die schade toebrengt aan de unit. amount bepaalt hoeveel schade de unit krijgt.
     {
@@ -39,35 +74,38 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
     protected virtual void Die() // Methode die uitgevoerd wordt wanneer de unit sterft. Virtual betekent dat andere klassen deze methode kunnen overschrijven.
     {
         if (occupiedTile != null) occupiedTile.occupiedUnit = null; // Controleert of de unit op een tegel staat en maakt die tegel daarna vrij.
+        UnitManager.instance.RemoveUnit(this); // Haalt de unit uit de lijsten van UnitManager zodat dode units geen beurt meer krijgen.
         Destroy(gameObject); // Verwijdert het volledige GameObject van de unit uit de scène.
     }
-    public IEnumerator MoveAlongPath(List<Tile> path)
+
+    public IEnumerator MoveAlongPath(List<Tile> path) // Coroutine die de unit tegel voor tegel over de route laat lopen. path is de lijst met tegels.
     {
-        isMoving = true;
+        isMoving = true; // De unit is aan het lopen.
 
-        foreach (Tile tile in path)
+        foreach (Tile tile in path) // Loopt elke tegel van de route af.
         {
-            Vector3 targetPosition = tile.transform.position;
+            Vector3 targetPosition = tile.transform.position; // De positie van de volgende tegel.
 
-            while (transform.position != targetPosition)
+            while (transform.position != targetPosition) // Herhaalt tot de unit op de tegel staat.
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-                yield return null;
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime); // Schuift de unit een klein stukje richting de tegel, afhankelijk van moveSpeed.
+                yield return null; // Wacht tot de volgende frame, zodat je de unit ziet bewegen.
             }
 
-            BaseUnit unitOnTile = tile.occupiedUnit;
+            tile.SetOnPath(false); // Zet de highlight van deze tegel uit, want de unit is er nu.
+            BaseUnit unitOnTile = tile.occupiedUnit; // Kijkt welke unit er op deze tegel staat.
 
-            if (unitOnTile != null && unitOnTile.faction != faction)
+            if (unitOnTile != null && unitOnTile.faction != faction) // Staat er een unit van de andere factie (een vijand)?
             {
-                unitOnTile.TakeDamage(attackDamage);
+                unitOnTile.TakeDamage(attackDamage); // Doet schade aan die vijand.
             }
 
-            if (tile.occupiedUnit == null)
+            if (tile.occupiedUnit == null) // Is de tegel leeg (of is de vijand net gestorven)?
             {
-                tile.SetUnit(this);
+                tile.SetUnit(this); // Zet de unit op deze tegel. Leeft de vijand nog, dan loopt de unit er gewoon doorheen.
             }
         }
 
-        isMoving = false;
+        isMoving = false; // De unit is klaar met lopen.
     }
 }
