@@ -6,25 +6,9 @@ public class MenuManager : MonoBehaviour // Maakt de klasse MenuManager aan. Dez
     public static MenuManager instance; // Maakt een globale verwijzing zodat andere scripts de MenuManager kunnen gebruiken.
     [SerializeField] private GameObject selectedHeroObject, tileObject, tileUnitObject; // Verwijst naar drie UI-objecten: informatie over de geselecteerde held, de tegel en de unit op die tegel.
 
-    [SerializeField] private Text arrowText; // De tekst linksboven die het aantal pijlen toont.
-
     private void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen.
     {
         instance = this; // Slaat deze MenuManager op als de globale instance.
-    }
-
-    private void Update() // Wordt elke frame uitgevoerd. Houdt de pijltekst linksboven bij.
-    {
-        if (arrowText == null) return; // Er is geen tekst gekoppeld: niks doen.
-
-        if (UnitManager.instance.heroes.Count == 0) // Geen held meer (game over)?
-        {
-            arrowText.text = ""; // Dan de tekst leegmaken.
-            return; // Stopt de methode.
-        }
-
-        BaseHero hero = UnitManager.instance.heroes[0]; // De Knight.
-        arrowText.text = "Pijlen: " + hero.arrowsLeft + " / " + hero.maxArrows; // Bijvoorbeeld "Pijlen: 1 / 2".
     }
 
     public void ShowTileInfo(Tile tile) // Methode die informatie toont over de tegel waar de muis op staat. tile is die tegel, of null om de informatie te verbergen.

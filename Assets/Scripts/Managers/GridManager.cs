@@ -71,43 +71,43 @@ public class GridManager : MonoBehaviour // Maakt de klasse GridManager aan, die
         return null; // Geeft null terug als er geen tegel op die positie bestaat.
     }
 
-    public List<Tile> FindPath(Tile start, Tile goal, int maxSteps) // Methode die de kortste route van start naar goal zoekt, met maximaal maxSteps stappen. Geeft null terug als dat niet lukt.
+    public List<Tile> FindPath(Tile start, Tile goal, int maxSteps)
     {
-        Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right }; // De vier richtingen waarin je kunt stappen (geen diagonalen).
-        var queue = new Queue<Tile>(); // Wachtrij met tegels die we nog moeten bekijken. De eerste die erin gaat, komt er ook eerst uit.
-        var cameFrom = new Dictionary<Tile, Tile>(); // Onthoudt voor elke tegel van welke tegel we kwamen, zodat we de route later kunnen terugvinden.
-        var steps = new Dictionary<Tile, int>(); // Onthoudt voor elke tegel hoeveel stappen hij van de start ligt.
+        Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+        var queue = new Queue<Tile>();
+        var cameFrom = new Dictionary<Tile, Tile>();
+        var steps = new Dictionary<Tile, int>();
 
-        queue.Enqueue(start); // Begint bij de starttegel.
-        steps[start] = 0; // De starttegel ligt 0 stappen van zichzelf.
+        queue.Enqueue(start);
+        steps[start] = 0;
 
-        while (queue.Count > 0) // Blijft zoeken zolang er nog tegels in de wachtrij staan.
+        while (queue.Count > 0)
         {
-            Tile current = queue.Dequeue(); // Haalt de volgende tegel uit de wachtrij.
-            if (current == goal) break; // Het doel is gevonden, dus stoppen met zoeken.
-            if (steps[current] == maxSteps) continue; // Het maximum aantal stappen is bereikt, dus niet verder zoeken vanaf deze tegel.
+            Tile current = queue.Dequeue();
+            if (current == goal) break;
+            if (steps[current] == maxSteps) continue;
 
-            foreach (Vector2 direction in directions) // Bekijkt de buurtegel in elke richting.
+            foreach (Vector2 direction in directions)
             {
-                Tile next = GetAtPosition((Vector2)current.transform.position + direction); // Haalt de buurtegel op.
-                if (next == null || !next.walkable || steps.ContainsKey(next)) continue; // Overslaan als hij buiten het speelveld ligt, niet bewandelbaar of bezet is, of al bekeken is.
+                Tile next = GetAtPosition((Vector2)current.transform.position + direction);
+                if (next == null || !next.walkable || steps.ContainsKey(next)) continue;
 
-                steps[next] = steps[current] + 1; // De buurtegel ligt 1 stap verder dan de huidige tegel.
-                cameFrom[next] = current; // Onthoudt dat we via de huidige tegel bij de buurtegel kwamen.
-                queue.Enqueue(next); // Zet de buurtegel in de wachtrij om later verder te zoeken.
+                steps[next] = steps[current] + 1;
+                cameFrom[next] = current;
+                queue.Enqueue(next);
             }
         }
 
-        if (!steps.ContainsKey(goal)) return null; // Het doel is nooit bereikt, dus er is geen route.
+        if (!steps.ContainsKey(goal)) return null;
 
-        var path = new List<Tile>(); // Maakt een lege lijst voor de route.
-        Tile tile = goal; // Begint bij het doel en loopt terug naar de start.
-        while (tile != start) // Herhaalt tot we terug bij de start zijn.
+        var path = new List<Tile>();
+        Tile tile = goal;
+        while (tile != start)
         {
-            path.Add(tile); // Zet de tegel in de route.
-            tile = cameFrom[tile]; // Gaat naar de tegel waar we vandaan kwamen.
+            path.Add(tile);
+            tile = cameFrom[tile];
         }
-        path.Reverse(); // Draait de lijst om, zodat de route bij de start begint en bij het doel eindigt.
-        return path; // Geeft de route terug. De starttegel zit er niet in.
+        path.Reverse();
+        return path;
     }
 }
