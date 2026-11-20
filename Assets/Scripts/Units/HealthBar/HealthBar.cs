@@ -59,9 +59,9 @@ public class HealthBar : MonoBehaviour // Maakt de klasse HealthBar aan. MonoBeh
         }
 
         // Testen: H = 1 schade
-        if (damageWithH && Keyboard.current != null && Keyboard.current.wKey.wasPressedThisFrame) // Controleert of testen ingeschakeld zijn, het toetsenbord beschikbaar is en de H-toets deze frame ingedrukt werd.
+        if (damageWithH && Keyboard.current != null && Keyboard.current.hKey.wasPressedThisFrame) // Controleert of testen ingeschakeld zijn, het toetsenbord beschikbaar is en de H-toets deze frame ingedrukt werd.
         {
-            target.TakeDamage(3); // Roept TakeDamage aan en brengt 1 schade toe aan de unit.
+            target.TakeDamage(1); // Roept TakeDamage aan en brengt 1 schade toe aan de unit.
         }
     }
 

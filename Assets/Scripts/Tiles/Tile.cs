@@ -1,4 +1,6 @@
+using UnityEditor.Rendering; // Rendering-functionaliteiten van de Unity Editor. Wordt hier momenteel niet gebruikt.
 using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Debug, GameObject en Vector2.
+using UnityEngine.InputSystem; // Geeft toegang tot het nieuwe Unity Input System, hier gebruikt om de muispositie te lezen.
 
 public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aan. Abstract betekent dat je hiervan niet rechtstreeks een object kunt maken, maar wel andere klassen kunt laten overerven.
 {
@@ -10,16 +12,7 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
     public BaseUnit occupiedUnit; // Bewaart welke unit momenteel op deze tegel staat.
 
     public bool walkable => isWalkable && occupiedUnit == null; // Controleert of de tegel bewandelbaar is EN of er geen unit op staat. Beide voorwaarden moeten true zijn.
-    public bool canPassThrough => isWalkable && !(occupiedUnit is BaseHero); // Is true als een held door deze tegel mag lopen: geen berg en geen andere held. Een vijand mag er wel staan.
-    public bool isOnPath; // Is true als deze tegel op de getekende route ligt.
-    public bool isInRange; // Is true als deze tile in het schietbereik van de boog ligt.
-    public bool blocksArrows => !isWalkable; // Bergen houden pijlen tegen.
-
-    public void SetInRange(bool inRange) // Zet een tile in het schietbereik of haalt hem eruit.
-    {
-        isInRange = inRange; // Onthoudt of de tile in het bereik ligt.
-        highlight.SetActive(inRange || isOnPath); // Laat de tile oplichten als hij in bereik of op de route ligt.
-    }
+    public bool canPassThrough => isWalkable && !(occupiedUnit is BaseHero);
 
     public virtual void Init(int x, int y) // Methode die een tegel initialiseert met zijn x- en y-coördinaten. Virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
@@ -30,23 +23,17 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
     {
         highlight.SetActive(true); // Activeert het highlight-effect zodat de tegel oplicht.
         MenuManager.instance.ShowTileInfo(this); // Toont informatie over deze tegel in het menu. this verwijst naar deze tegel.
+        UnitManager.instance.AddTileToPath(this);
     }
 
     private void OnMouseExit() // Wordt automatisch uitgevoerd wanneer de muis de tegel verlaat.
     {
-        highlight.SetActive(isOnPath || isInRange); // Blijft oplichten als de tile op de route of in het schietbereik ligt. // Laat de highlight aan als de tegel op de route ligt, en zet hem anders uit.
+        highlight.SetActive(false); // Deactiveert het highlight-effect zodat de tegel niet meer oplicht.
         MenuManager.instance.ShowTileInfo(null); // Verbergt de getoonde tegelinformatie in het menu.
     }
-
-    public void SetOnPath(bool onPath) // Methode die een tegel op de route zet of eraf haalt. onPath is true of false.
+    private void OnMouseUp()
     {
-        isOnPath = onPath; // Onthoudt of de tegel op de route ligt.
-        highlight.SetActive(onPath); // Zet de highlight aan of uit.
-    }
-
-    private void OnMouseUp() // Wordt automatisch uitgevoerd als je de muis loslaat na het klikken op deze tegel.
-    {
-        UnitManager.instance.FinishDrawingPath(); // Laat de held de getekende route lopen.
+        UnitManager.instance.FinishDrawingPath();
     }
 
     private void OnMouseDown() // Wordt automatisch uitgevoerd wanneer je met de muis op deze tegel klikt.
@@ -56,11 +43,6 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
         {
             Debug.Log("Niet de heroes turn"); // Toont een bericht in de Console dat het niet de beurt van de helden is.
             return; // Stopt de methode onmiddellijk zodat de rest van de code niet uitgevoerd wordt.
-        }
-        if (UnitManager.instance.isAiming)
-        {
-            UnitManager.instance.TryShoot(this);
-            return;
         }
 
         if (occupiedUnit != null) // Controleert of er al een unit op deze tegel staat.
@@ -74,7 +56,14 @@ public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aa
 
             else // Wordt uitgevoerd wanneer de unit geen held is, dus een vijand.
             {
-                Debug.Log("Tegenstander op tile"); // Toont in de Console dat er een tegenstander op de tegel staat. Schade doe je door met de held door de vijand te lopen.
+                Debug.Log("Tegenstander op tile"); // Toont in de Console dat er een tegenstander op de tegel staat.
+                if (UnitManager.instance.selectedHero != null) // Controleert of er momenteel een held geselecteerd is.
+                {
+                    Debug.Log("Damaged Enemy"); // Toont in de Console dat de vijand schade krijgt.
+                    var enemy = (BaseEnemy)occupiedUnit; // Zet de bezette unit om naar BaseEnemy zodat we de vijand-specifieke klasse kunnen gebruiken.
+                    enemy.TakeDamage(UnitManager.instance.selectedHero.attackDamage); // Doet schade aan de vijand, gelijk aan de attackDamage van de geselecteerde held.
+                    UnitManager.instance.SetSelectedHero(null); // Deselecteert de held nadat de aanval uitgevoerd is.
+                }
             }
         }
     }

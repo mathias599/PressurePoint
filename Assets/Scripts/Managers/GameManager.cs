@@ -42,8 +42,7 @@ public class GameManager : MonoBehaviour // Maakt de klasse GameManager aan. Dez
                 break; // Stopt deze case. Er staat momenteel geen extra code in.
 
             case GameState.EnemiesTurn: // Wordt uitgevoerd wanneer het de beurt van de vijanden is.
-                UnitManager.instance.StartEnemyTurn(); // Start de beurt van de vijanden. Elke vijand voert om de beurt zijn actie uit.
-                break; // Stopt deze case.
+                break; // Stopt deze case. Er staat momenteel geen extra code in.
 
             default: // Wordt uitgevoerd als geen van de bovenstaande cases overeenkomt.
                 break; // Stopt de switch.
