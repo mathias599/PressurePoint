@@ -113,6 +113,7 @@ MonoBehaviour:
   highlight: {fileID: 4676399304715321039}
   isWalkable: 0
   occupiedUnit: {fileID: 0}
+  isOnPath: 0
 --- !u!61 &2103293993972829001
 BoxCollider2D:
   m_ObjectHideFlags: 0
