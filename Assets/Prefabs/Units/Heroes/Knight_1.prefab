@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6832053025042732650}
   - component: {fileID: 1802521704074854081}
   - component: {fileID: 6051768351116329491}
+  - component: {fileID: 2141121389184336003}
   m_Layer: 0
   m_Name: Knight_1
   m_TagString: Untagged
@@ -115,10 +116,35 @@ MonoBehaviour:
   moveRange: 3
   moveSpeed: 4
   isMoving: 0
+  animator: {fileID: 0}
   hasBow: 1
   bowDamage: 5
   bowRange: 3
   bowObject: {fileID: 3329683103043162728}
+  maxArrows: 2
+  arrowsLeft: 0
+--- !u!95 &2141121389184336003
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565844159281811374}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d42b0cdafbae7354db4dda5c70773d8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3329683103043162728
 GameObject:
   m_ObjectHideFlags: 0

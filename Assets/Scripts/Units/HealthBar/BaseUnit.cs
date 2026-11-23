@@ -15,10 +15,13 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
     public int moveRange = 3; // Hoeveel tegels deze unit per beurt mag lopen. Gebruikt door de route van de held en de vijand-AI.
     public float moveSpeed = 4f; // Hoe snel de unit glijdt (tegels per seconde).
     public bool isMoving; // True zolang de unit aan het lopen is.
+    [SerializeField] private Animator animator;
 
     protected virtual void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen. Protected virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
     {
         currentHealth = maxHealth; // Zet de huidige levenspunten gelijk aan de maximale levenspunten bij het starten.
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     public IEnumerator GlideTo(Tile tile) // Verplaatst de unit langzaam naar de tegel
@@ -41,7 +44,12 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
 
     public void Attack(BaseUnit target) // Valt een andere unit aan.
     {
-        target.TakeDamage(attackDamage); // Doet schade aan het doelwit, gelijk aan de attackDamage van deze unit.
+        if (animator != null)
+            animator.SetTrigger("AttackLeft");
+        else
+            Debug.LogWarning(name + " heeft geen Animator!", this);
+
+        target.TakeDamage(attackDamage); // Doet schade aan het doelwit.
     }
 
     public Vector2 GridPos => occupiedTile.transform.position; // Geeft de positie van deze unit op het raster. De tegels staan precies op hun x- en y-coördinaat.
@@ -97,7 +105,7 @@ public class BaseUnit : MonoBehaviour // Maakt de klasse BaseUnit aan. Dit is de
 
             if (unitOnTile != null && unitOnTile.faction != faction) // Staat er een unit van de andere factie (een vijand)?
             {
-                unitOnTile.TakeDamage(attackDamage); // Doet schade aan die vijand.
+                Attack(unitOnTile); // Doet schade aan die vijand en speelt de aanvalsanimatie af.
             }
 
             if (tile.occupiedUnit == null) // Is de tegel leeg (of is de vijand net gestorven)?
