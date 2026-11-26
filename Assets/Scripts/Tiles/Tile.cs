@@ -1,91 +1,107 @@
-using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Debug, GameObject en Vector2.
+using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals MonoBehaviour, Debug en GameObject.
 
-public abstract class Tile : MonoBehaviour // Maakt een abstracte klasse Tile aan. Abstract betekent dat je hiervan niet rechtstreeks een object kunt maken, maar wel andere klassen kunt laten overerven.
+// Basisklasse van alle tegels. Abstract: je maakt altijd een GrassTile of MountainTile, nooit een losse Tile.
+public abstract class Tile : MonoBehaviour
 {
-    public string tileName; // Bewaart de naam van de tegel.
-    [SerializeField] protected SpriteRenderer renderer; // Verwijst naar de SpriteRenderer die de afbeelding van de tegel toont. SerializeField maakt deze zichtbaar in de Inspector en protected maakt hem toegankelijk voor afgeleide klassen.
-    [SerializeField] private GameObject highlight; // Verwijst naar het highlight-effect dat zichtbaar wordt wanneer je met de muis over een tegel gaat.
-    [SerializeField] private bool isWalkable; // Bepaalt of je op dit type tegel kunt staan. Een bool kan true of false zijn.
+    [Header("Tegel")]
+    [Tooltip("Naam van de tegel, getoond in het menu.")]
+    public string tileName;
+    [Tooltip("Kun je op dit type tegel staan? Gras wel, berg niet. Een tegel die niet bewandelbaar is, houdt ook pijlen tegen.")]
+    [SerializeField] private bool isWalkable;
 
-    public BaseUnit occupiedUnit; // Bewaart welke unit momenteel op deze tegel staat.
+    [Header("Onderdelen")]
+    [Tooltip("De SpriteRenderer van de tegel.")]
+    [SerializeField] protected SpriteRenderer renderer;
+    [Tooltip("Het object dat de tegel laat oplichten.")]
+    [SerializeField] private GameObject highlight;
 
-    public bool walkable => isWalkable && occupiedUnit == null; // Controleert of de tegel bewandelbaar is EN of er geen unit op staat. Beide voorwaarden moeten true zijn.
-    public bool canPassThrough => isWalkable && !(occupiedUnit is BaseHero); // Is true als een held door deze tegel mag lopen: geen berg en geen andere held. Een vijand mag er wel staan.
-    public bool isOnPath; // Is true als deze tegel op de getekende route ligt.
-    public bool isInRange; // Is true als deze tile in het schietbereik van de boog ligt.
+    [Header("Status tijdens het spel (niet aanpassen)")]
+    public BaseUnit occupiedUnit; // De unit die nu op deze tegel staat, of null.
+
+    public bool walkable => isWalkable && occupiedUnit == null; // Je kunt hier staan én de tegel is leeg.
+    public bool canPassThrough => isWalkable && !(occupiedUnit is BaseHero); // Een held mag hier doorheen: geen berg en geen andere held. Een vijand mag er wel staan.
     public bool blocksArrows => !isWalkable; // Bergen houden pijlen tegen.
 
-    public void SetInRange(bool inRange) // Zet een tile in het schietbereik of haalt hem eruit.
+    public bool isOnPath; // Ligt deze tegel op de getekende route?
+    public bool isInRange; // Ligt deze tegel in het schietbereik van de boog?
+
+    public virtual void Init(int x, int y) // Wordt aangeroepen als GridManager de tegel aanmaakt. Virtual: GrassTile vult dit zelf in.
     {
-        isInRange = inRange; // Onthoudt of de tile in het bereik ligt.
-        highlight.SetActive(inRange || isOnPath); // Laat de tile oplichten als hij in bereik of op de route ligt.
     }
 
-    public virtual void Init(int x, int y) // Methode die een tegel initialiseert met zijn x- en y-coördinaten. Virtual betekent dat afgeleide klassen deze methode kunnen overschrijven.
+    public void SetUnit(BaseUnit unit) // Zet een unit op deze tegel.
     {
-
+        if (unit.occupiedTile != null) unit.occupiedTile.occupiedUnit = null; // Maakt de vorige tegel van de unit vrij.
+        unit.transform.position = transform.position; // Zet de unit precies op deze tegel.
+        occupiedUnit = unit; // Deze tegel weet welke unit erop staat...
+        unit.occupiedTile = this; // ...en de unit weet op welke tegel hij staat.
     }
 
-    private void OnMouseEnter() // Wordt automatisch uitgevoerd wanneer de muis boven deze tegel komt.
+    // ---------------------------------------------------------------- Oplichten
+
+    public void SetOnPath(bool onPath) // Zet de tegel op de route of haalt hem eraf.
     {
-        highlight.SetActive(true); // Activeert het highlight-effect zodat de tegel oplicht.
-        MenuManager.instance.ShowTileInfo(this); // Toont informatie over deze tegel in het menu. this verwijst naar deze tegel.
+        isOnPath = onPath;
+        UpdateHighlight();
     }
 
-    private void OnMouseExit() // Wordt automatisch uitgevoerd wanneer de muis de tegel verlaat.
+    public void SetInRange(bool inRange) // Zet de tegel in het schietbereik of haalt hem eruit.
     {
-        highlight.SetActive(isOnPath || isInRange); // Blijft oplichten als de tile op de route of in het schietbereik ligt. // Laat de highlight aan als de tegel op de route ligt, en zet hem anders uit.
-        MenuManager.instance.ShowTileInfo(null); // Verbergt de getoonde tegelinformatie in het menu.
+        isInRange = inRange;
+        UpdateHighlight();
     }
 
-    public void SetOnPath(bool onPath) // Methode die een tegel op de route zet of eraf haalt. onPath is true of false.
+    private void UpdateHighlight() // Licht op zolang de tegel op de route of in het schietbereik ligt.
     {
-        isOnPath = onPath; // Onthoudt of de tegel op de route ligt.
-        highlight.SetActive(onPath); // Zet de highlight aan of uit.
+        highlight.SetActive(isOnPath || isInRange);
     }
 
-    private void OnMouseUp() // Wordt automatisch uitgevoerd als je de muis loslaat na het klikken op deze tegel.
+    // ---------------------------------------------------------------- Muis
+
+    private void OnMouseEnter() // De muis komt boven deze tegel.
     {
-        UnitManager.instance.FinishDrawingPath(); // Laat de held de getekende route lopen.
+        highlight.SetActive(true); // Laat de tegel oplichten.
+        MenuManager.instance.ShowTileInfo(this); // Toont de info van deze tegel.
     }
 
-    private void OnMouseDown() // Wordt automatisch uitgevoerd wanneer je met de muis op deze tegel klikt.
+    private void OnMouseExit() // De muis verlaat deze tegel.
     {
-        Debug.Log("Tile werd aangeklikt"); // Toont een bericht in de Unity Console om te controleren of de tegel aangeklikt werd.
-        if (GameManager.Instance.State != GameManager.GameState.HeroesTurn) // Controleert of het NIET de beurt van de helden is.
+        UpdateHighlight(); // Blijft alleen oplichten als hij op de route of in het bereik ligt.
+        MenuManager.instance.ShowTileInfo(null); // Verbergt de tegelinfo.
+    }
+
+    private void OnMouseDown() // Er wordt op deze tegel geklikt.
+    {
+        Debug.Log("Tile werd aangeklikt");
+
+        if (GameManager.Instance.State != GameManager.GameState.HeroesTurn) // Niet de beurt van de speler?
         {
-            Debug.Log("Niet de heroes turn"); // Toont een bericht in de Console dat het niet de beurt van de helden is.
-            return; // Stopt de methode onmiddellijk zodat de rest van de code niet uitgevoerd wordt.
-        }
-        if (UnitManager.instance.isAiming)
-        {
-            UnitManager.instance.TryShoot(this);
+            Debug.Log("Niet de heroes turn");
             return;
         }
 
-        if (occupiedUnit != null) // Controleert of er al een unit op deze tegel staat.
+        if (UnitManager.instance.isAiming) // Aan het richten met de boog?
         {
-            Debug.Log("Tile is niet leeg"); // Toont in de Console dat de tegel bezet is.
-            if (occupiedUnit.faction == Faction.Hero) // Controleert of de unit op deze tegel bij de factie van de helden hoort.
-            {
-                Debug.Log("Hero aangeklikt"); // Toont in de Console dat een held aangeklikt werd.
-                UnitManager.instance.StartDrawingPath((BaseHero)occupiedUnit); // Selecteert de held en begint een route te tekenen.
-            }
+            UnitManager.instance.TryShoot(this); // Dan schieten op deze tegel...
+            return; // ...en geen route tekenen.
+        }
 
-            else // Wordt uitgevoerd wanneer de unit geen held is, dus een vijand.
-            {
-                Debug.Log("Tegenstander op tile"); // Toont in de Console dat er een tegenstander op de tegel staat. Schade doe je door met de held door de vijand te lopen.
-            }
+        if (occupiedUnit == null) return; // Lege tegel: niks te doen.
+
+        Debug.Log("Tile is niet leeg");
+        if (occupiedUnit.faction == Faction.Hero) // Een held?
+        {
+            Debug.Log("Hero aangeklikt");
+            UnitManager.instance.StartDrawingPath((BaseHero)occupiedUnit); // Selecteert de held en begint een route te tekenen.
+        }
+        else // Een vijand. Schade doe je door er met de held doorheen te lopen of te schieten.
+        {
+            Debug.Log("Tegenstander op tile");
         }
     }
 
-    public void SetUnit(BaseUnit unit) // Methode die een unit op deze tegel plaatst.
+    private void OnMouseUp() // De muis wordt losgelaten na een klik op deze tegel.
     {
-        if (unit.occupiedTile != null) unit.occupiedTile.occupiedUnit = null; // Controleert of de unit al op een andere tegel staat en maakt die vorige tegel vrij.
-        unit.transform.position = transform.position; // Verplaatst de unit naar de exacte positie van deze tegel.
-        occupiedUnit = unit; // Onthoudt dat deze unit nu op deze tegel staat.
-        unit.occupiedTile = this; // Onthoudt bij de unit dat hij nu op deze tegel staat.
-
+        UnitManager.instance.FinishDrawingPath(); // De held loopt de getekende route.
     }
-
 }

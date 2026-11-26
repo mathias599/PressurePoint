@@ -1,13 +1,16 @@
-    using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals Color en SerializeField.
-using UnityEngine.UIElements; // Geeft toegang tot UI Toolkit. Wordt hier momenteel niet gebruikt.
+using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals Color.
 
-public class GrassTile : Tile // Maakt de klasse GrassTile aan. Deze erft alles van Tile en is de grastegel van het speelveld.
+public class GrassTile : Tile // De grastegel. Erft alles van Tile.
 {
-    [SerializeField] private Color baseColor, offsetcolor; // De twee kleuren van het gras. SerializeField maakt ze zichtbaar in de Inspector.
+    [Header("Kleuren")]
+    [Tooltip("Kleur van de ene helft van het dambordpatroon.")]
+    [SerializeField] private Color baseColor;
+    [Tooltip("Kleur van de andere helft van het dambordpatroon.")]
+    [SerializeField] private Color offsetcolor;
 
-    public override void Init(int x, int y) // Vervangt de Init-methode van Tile. Wordt uitgevoerd wanneer GridManager deze tegel aanmaakt.
+    public override void Init(int x, int y) // Wordt aangeroepen als GridManager deze tegel aanmaakt.
     {
-        var isOffset = (x + y) % 2 == 1; // Is true wanneer x + y oneven is. Zo ontstaat een dambordpatroon.
-        renderer.color = isOffset ? offsetcolor : baseColor; // Geeft de tegel de offsetkleur als isOffset true is, en anders de basiskleur.
+        bool isOffset = (x + y) % 2 == 1; // True als x + y oneven is: zo ontstaat een dambordpatroon.
+        renderer.color = isOffset ? offsetcolor : baseColor; // Om en om de ene of de andere kleur.
     }
 }

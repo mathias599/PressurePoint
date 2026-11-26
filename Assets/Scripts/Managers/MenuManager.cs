@@ -4,9 +4,19 @@ using UnityEngine.UI; // Geeft toegang tot UI-elementen zoals Text.
 public class MenuManager : MonoBehaviour // Maakt de klasse MenuManager aan. Deze beheert de menu's en informatie die op het scherm verschijnen.
 {
     public static MenuManager instance; // Maakt een globale verwijzing zodat andere scripts de MenuManager kunnen gebruiken.
-    [SerializeField] private GameObject selectedHeroObject, tileObject, tileUnitObject; // Verwijst naar drie UI-objecten: informatie over de geselecteerde held, de tegel en de unit op die tegel.
+    [Header("Info-vakjes")]
+    [Tooltip("Vakje met de naam van de geselecteerde held.")]
+    [SerializeField] private GameObject selectedHeroObject;
+    [Tooltip("Vakje met de naam van de tegel onder de muis.")]
+    [SerializeField] private GameObject tileObject;
+    [Tooltip("Vakje met de naam van de unit op de tegel onder de muis.")]
+    [SerializeField] private GameObject tileUnitObject;
 
-    [SerializeField] private Text arrowText; // De tekst linksboven die het aantal pijlen toont.
+    [Header("Pijlenteller")]
+    [Tooltip("De tekst linksboven die het aantal pijlen toont.")]
+    [SerializeField] private Text arrowText;
+    [Tooltip("Tekst vóór het aantal pijlen. \"Pijlen: \" geeft bijvoorbeeld \"Pijlen: 1 / 2\".")]
+    [SerializeField] private string arrowTextPrefix = "Pijlen: ";
 
     private void Awake() // Wordt automatisch uitgevoerd wanneer het GameObject wordt geladen.
     {
@@ -24,7 +34,7 @@ public class MenuManager : MonoBehaviour // Maakt de klasse MenuManager aan. Dez
         }
 
         BaseHero hero = UnitManager.instance.heroes[0]; // De Knight.
-        arrowText.text = "Pijlen: " + hero.arrowsLeft + " / " + hero.maxArrows; // Bijvoorbeeld "Pijlen: 1 / 2".
+        arrowText.text = arrowTextPrefix + hero.arrowsLeft + " / " + hero.maxArrows; // Bijvoorbeeld "Pijlen: 1 / 2".
     }
 
     public void ShowTileInfo(Tile tile) // Methode die informatie toont over de tegel waar de muis op staat. tile is die tegel, of null om de informatie te verbergen.

@@ -118,8 +118,8 @@ MonoBehaviour:
   isMoving: 0
   animator: {fileID: 0}
   hasBow: 1
-  bowDamage: 5
-  bowRange: 3
+  bowDamage: 4
+  bowRange: 4
   bowObject: {fileID: 3329683103043162728}
   maxArrows: 2
   arrowsLeft: 0

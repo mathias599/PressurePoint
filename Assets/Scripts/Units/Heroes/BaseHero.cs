@@ -1,18 +1,25 @@
-using UnityEngine;
+using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals GameObject en Header.
 
-public class BaseHero : BaseUnit // Maakt de klasse BaseHero aan. Deze erft alles van BaseUnit. Dit is de basisklasse van alle helden.
+public class BaseHero : BaseUnit // Basisklasse van alle helden. Erft alles van BaseUnit en heeft daarnaast een boog.
 {
-    [Header("Pijl en boog")] // Toont een aparte titel 'Pijl en boog' in de Inspector.
-    public bool hasBow = true; // Bepaalt of deze held een boog heeft.
-    public int bowDamage = 2; // Hoeveel schade één pijl doet.
-    public int bowRange = 2; // Aantal tiles in elke richting. 2 = een vak van 5x5, 3 = 7x7 (de Knight-prefab staat op 3).
-    public GameObject bowObject; // Het boog-plaatje op de held. Wordt zichtbaar als je op B drukt.
-    public int maxArrows = 2; // Hoeveel pijlen de held in totaal heeft.
-    public int arrowsLeft; // Hoeveel pijlen de held nog over heeft.
+    [Header("Pijl en boog")]
+    [Tooltip("Kan deze held de boog gebruiken?")]
+    public bool hasBow = true;
+    [Tooltip("Schade van één pijl.")]
+    [Min(0)] public int bowDamage = 2;
+    [Tooltip("Bereik in tegels in elke richting. 2 = vak van 5x5, 3 = 7x7, 4 = 9x9.")]
+    [Min(1)] public int bowRange = 2;
+    [Tooltip("Hoeveel pijlen de held in totaal heeft.")]
+    [Min(0)] public int maxArrows = 2;
+    [Tooltip("Het boog-plaatje op de held. Is alleen zichtbaar zolang je richt.")]
+    public GameObject bowObject;
 
-    protected override void Awake() // Vervangt de Awake van BaseUnit.
+    [Header("Status tijdens het spel (niet aanpassen)")]
+    public int arrowsLeft; // Hoeveel pijlen er nog over zijn. Wordt bij de start op maxArrows gezet.
+
+    protected override void Awake() // Vult de Awake van BaseUnit aan.
     {
-        base.Awake(); // Doet eerst alles van BaseUnit (health op max zetten).
+        base.Awake(); // Eerst alles van BaseUnit (health op max, Animator zoeken).
         arrowsLeft = maxArrows; // Begint met alle pijlen.
     }
 }

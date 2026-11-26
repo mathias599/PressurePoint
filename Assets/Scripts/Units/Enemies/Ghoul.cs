@@ -1,4 +1,3 @@
-public class Ghoul : BaseEnemy // Maakt de klasse Enemy1 aan. Deze erft alles van BaseEnemy. Dit is het script van de Ghoul.
+public class Ghoul : BaseEnemy // Het script van de Ghoul. Alles wat hij doet, erft hij van BaseEnemy.
 {
-    // Nog leeg: alles wat deze unit nodig heeft, erft hij van BaseEnemy.
 }

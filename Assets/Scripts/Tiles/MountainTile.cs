@@ -1,4 +1,3 @@
-public class MountainTile : Tile // Maakt de klasse MountainTile aan. Deze erft alles van Tile en is de bergtegel van het speelveld.
+public class MountainTile : Tile // De bergtegel. Erft alles van Tile; dat je er niet op kunt staan, staat ingesteld in de prefab (Is Walkable uit).
 {
-    // Nog leeg: alles wat deze unit nodig heeft, erft hij van Tile.
 }

@@ -1,11 +1,10 @@
-using UnityEngine; // Geeft toegang tot Unity-functionaliteiten zoals ScriptableObject.
+using UnityEngine; // Geeft toegang tot ScriptableObject en CreateAssetMenu.
 
-[CreateAssetMenu(fileName = "New Unit", menuName = "Scriptable Unit")] // Zorgt ervoor dat je via Assets > Create > Scriptable Unit een nieuw asset kunt aanmaken. De standaardnaam is New Unit.
-
-public class ScriptableUnit : ScriptableObject // Maakt de klasse ScriptableUnit aan. ScriptableObject laat je gegevens opslaan als een apart asset in Unity.
+[CreateAssetMenu(fileName = "New Unit", menuName = "Scriptable Unit")] // Maakt Assets > Create > Scriptable Unit mogelijk.
+public class ScriptableUnit : ScriptableObject // Een asset dat zegt welke prefab bij een unit hoort en bij welke factie hij hoort.
 {
-    public Faction Faction; // Bewaart tot welke factie deze unit behoort: Hero of Enemy.
-    public BaseUnit UnitPrefab; // Verwijst naar de prefab die bij deze Scriptable Unit hoort.
+    public Faction Faction; // Hero of Enemy.
+    public BaseUnit UnitPrefab; // De prefab van deze unit.
 }
 
-public enum Faction { Hero = 0, Enemy = 1 } // Maakt een enum aan met twee mogelijke facties: Hero heeft waarde 0 en Enemy heeft waarde 1.
+public enum Faction { Hero = 0, Enemy = 1 } // De twee facties.
