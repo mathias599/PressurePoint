@@ -110,4 +110,8 @@ MonoBehaviour:
   faction: 1
   maxHealth: 9
   currentHealth: 0
-  attackDamage: 3
+  attackDamage: 5
+  moveRange: 3
+  moveSpeed: 4
+  isMoving: 0
+  animator: {fileID: 0}
